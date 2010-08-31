@@ -1,6 +1,7 @@
 # on_the_spot
 
 On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable.
+(currently a work in progress, extracted it from a rails3 application)
 
 ## Installation
 
@@ -8,7 +9,7 @@ Inside your `Gemfile` add the following:
 
     gem "on_the_spot"
 
-Run the installtion task:
+Run the installation task:
 
     rails g on_the_spot:install
 
@@ -25,7 +26,7 @@ Inside your controller you write:
 
     end
 
-And inside your view you will have to specify the fields which you want to be "editable" :
+And inside your view you will have to specify the fields you want to be "editable" :
 
     Username: <%= in_place_edit @user, :name %>
 
