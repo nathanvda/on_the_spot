@@ -13,8 +13,16 @@ Run the installation task:
 
     rails g on_the_spot:install
 
-Then you can start using it!
+Inside your `routes.rb` you provide the catch-all
 
+      match ':controller(/:action(/:id(.:format)))'
+
+This is not ideal: i am looking for a better solution.
+
+But that is all you need to do to start using it!
+
+
+## Usage
 Inside your controller you write:
 
 
@@ -28,14 +36,15 @@ Inside your controller you write:
 
 And inside your view you will have to specify the fields you want to be "editable" :
 
-    Username: <%= in_place_edit @user, :name %>
+    Username: <%= on_the_spot_edit @user, :name %>
 
 
 It should be as simple as that :)
 
 ## To do
 
-- get it completely working first ;)
+- make sure you can overrule ok/cancel texts
+- make sure user can choose to use a textarea instead of just text
 - find a clean solution for the routes
 
 ## Note on Patches/Pull Requests
