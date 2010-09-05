@@ -1,19 +1,19 @@
+require 'on_the_spot/controller_extension'
+require 'on_the_spot/on_the_spot_helpers'
+
 module OnTheSpot
   class Railtie < ::Rails::Railtie
-    config.generators.integration_tool :rspec
-    config.generators.test_framework   :rspec
+
+    config.before_initialize do
+      config.action_view.javascript_expansions[:on_the_spot] = %w(jquery.jeditable.mini.js on_the_spot)
+    end
 
     # configure our plugin on boot. other extension points such
     # as configuration, rake tasks, etc, are also available
     initializer "on_the_spot.initialize" do |app|
-
       ActionController::Base.send :include, OnTheSpot::ControllerExtension
-      ActionController::Base.helpers OnTheSpot::Helpers
-
+      ActionView::Base.send :include, OnTheSpot::Helpers
     end
 
-    rake_tasks do
-      load "on_the_spot/tasks/on_the_spot.rake"
-    end
   end
 end

@@ -1,5 +1,5 @@
 module OnTheSpot
-  class ControllerExtension
+  module ControllerExtension
 
     def self.included(base)
       base.extend ClassMethods
@@ -10,7 +10,7 @@ module OnTheSpot
     module ClassMethods
       def can_edit_on_the_spot
         define_method :update_attribute_on_the_spot do
-          klass, field, id = id_string.split('__')
+          klass, field, id = params[:id].split('__')
           object = klass.camelize.constantize.find(id)
           object.update_attribute(field, params[:value])
           render :text => CGI::escapeHTML(object.send(field).to_s)

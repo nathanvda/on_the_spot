@@ -8,7 +8,11 @@ module OnTheSpot
       #  type: textarea or not
       #  button-translations ok-Text, cancel-Text
       #
-      content_tag("span", :id => "#{object.class.name.underscore}__#{field}__#{object.id}", :class => in_place_class.to_s) do
+      update_url = url_for(:action => 'update_attribute_on_the_spot')
+
+      content_tag("span", :id => "#{object.class.name.underscore}__#{field}__#{object.id}",
+                  :class => 'on_the_spot_editing',
+                  :'data-url' => update_url) do
         object.send(field.to_sym).to_s
       end
     end
