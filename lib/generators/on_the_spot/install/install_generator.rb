@@ -12,6 +12,7 @@ module OnTheSpot
       def copy_glue_javascript
         # !!!!! TO DO: check this -> how do a copy?
         copy_file "on_the_spot.js", "public/javascripts/on_the_spot.js"
+        copy_file "on_the_spot.en.yml", "config/locales/on_the_spot.en.yml"
       end
 
     end

@@ -13,13 +13,26 @@ Run the installation task:
 
     rails g on_the_spot:install
 
-Inside your `routes.rb` you provide the catch-all
+Inside your `routes.rb` you either provide the catch-all
 
-      match ':controller(/:action(/:id(.:format)))'
+    match ':controller(/:action(/:id(.:format)))'
 
-This is not ideal: i am looking for a better solution.
+or you type something like
 
-But that is all you need to do to start using it!
+    resources :posts do
+      collection do
+        get :update_attribute_on_the_spot
+      end
+    end
+
+While this last is the best solution, you need to do this for each controller that uses the on-the-spot editing.
+For the moment i do not know of any better solution, but i am always open for suggestions!
+
+Inside your `application.html.haml` you will need to add below the default javascripts:
+
+    = javascript_include_tag :on_the_spot
+
+That is all you need to do to start using it!
 
 
 ## Usage
@@ -41,11 +54,25 @@ And inside your view you will have to specify the fields you want to be "editabl
 
 It should be as simple as that :)
 
+## Detailed options
+
+The `on_the_spot_edit` also accepts options:
+
+* `type`    : `textarea` or `select` (none means default edit, select is currently not yet supported)
+* `ok_text` : the text for the ok-button
+* `cancel_text` : the text for the cancel-button
+* `tooltip` : the tooltip-text
+
+For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
+
+## Example project
+
+Ther is a example rails3-project called on_the_spot_tester here: http://github.com/nathanvda/on_the_spot_tester
+
 ## To do
 
-- make sure you can overrule ok/cancel texts
-- make sure user can choose to use a textarea instead of just text
-- find a clean solution for the routes
+- make sure user can choose to use a select instead of just text or textarea
+- add tests!
 
 ## Note on Patches/Pull Requests
  
