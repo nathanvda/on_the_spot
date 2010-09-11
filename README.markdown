@@ -1,7 +1,7 @@
 # on_the_spot
 
 On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable.
-(currently a work in progress, extracted it from a rails3 application)
+This is still in progress, but should already be usable for simple text-fields and text-areas.
 
 ## Installation
 
@@ -67,7 +67,7 @@ For the texts: if a text is not specified, the default is taken from the `on_the
 
 ## Example project
 
-Ther is a example rails3-project called on_the_spot_tester here: http://github.com/nathanvda/on_the_spot_tester
+Ther is a example rails3-project called [on_the_spot_tester](http://github.com/nathanvda/on_the_spot_tester)
 
 ## To do
 
