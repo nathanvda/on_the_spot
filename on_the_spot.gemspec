@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Van der Auwera"]
-  s.date = %q{2010-09-11}
+  s.date = %q{2010-10-06}
   s.description = %q{Unobtrusive in place editing, using jEditable; only works in Rails 3}
   s.email = %q{nathan@dixis.com}
   s.extra_rdoc_files = [
@@ -19,11 +19,14 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     ".rspec",
      "Gemfile",
+     "Gemfile.lock",
      "LICENSE",
      "README.markdown",
      "Rakefile",
      "VERSION",
+     "autotest/discover.rb",
      "lib/generators/on_the_spot/install/install_generator.rb",
      "lib/generators/on_the_spot/install/templates/jquery.jeditable.mini.js",
      "lib/generators/on_the_spot/install/templates/on_the_spot.en.yml",
@@ -51,12 +54,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>, [">= 2.0.0.beta20"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0.rc"])
+      s.add_development_dependency(%q<json_pure>, [">= 1.4.6"])
+      s.add_development_dependency(%q<actionpack>, [">= 3.0.0"])
     else
-      s.add_dependency(%q<rspec>, [">= 2.0.0.beta20"])
+      s.add_dependency(%q<actionpack>, [">= 3.0.0"])
     end
   else
-    s.add_dependency(%q<rspec>, [">= 2.0.0.beta20"])
+    s.add_dependency(%q<json_pure>, [">= 1.4.6"])
   end
 end
 

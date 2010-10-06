@@ -13,11 +13,7 @@ Run the installation task:
 
     rails g on_the_spot:install
 
-Inside your `routes.rb` you either provide the catch-all
-
-    match ':controller(/:action(/:id(.:format)))'
-
-or you type something like
+Inside your `routes.rb` you need to provide the following route:
 
     resources :posts do
       collection do
@@ -25,12 +21,16 @@ or you type something like
       end
     end
 
-While this last is the best solution, you need to do this for each controller that uses the on-the-spot editing.
+You need to do this for each controller that uses the on-the-spot editing.
 For the moment i do not know of any better solution, but i am always open for suggestions!
 
 Inside your `application.html.haml` you will need to add below the default javascripts:
 
     = javascript_include_tag :on_the_spot
+
+or using erb, you write
+
+    <%= javascript_include_tag :on_the_spot %>
 
 That is all you need to do to start using it!
 
@@ -58,21 +58,36 @@ It should be as simple as that :)
 
 The `on_the_spot_edit` also accepts options:
 
-* `type`    : `textarea` or `select` (none means default edit, select is currently not yet supported)
+* `type`    : `textarea` or `select` (none means default edit)
 * `ok_text` : the text for the ok-button
 * `cancel_text` : the text for the cancel-button
 * `tooltip` : the tooltip-text
+* `rows`: for textarea, the number of rows, defaults to 5
+* `columns`: for textarea, the number of columns, defaults to 40
+* `data`: for select, the lookup-data, should be in an array of id-value pairs. E.g. `[[1, 'ok'], [2, 'not ok'], [3, 'not decided']].
+
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
 
+## Example Usages
+
+### Edit field
+
+    <%= on_the_spot_edit @user, :name %>
+
+### Textarea
+
+    <%= on_the_spot_edit @user, :description, :type => :textarea, :rows => 10, :columns => 55 %>
+
+### Select-box
+
+    <%= on_the_spot_edit @user, :rating, :type => :select, :data => [[1, 'good'], [2, 'mediocre'], [3, 'bad']] %>
+
+
 ## Example project
 
-Ther is a example rails3-project called [on_the_spot_tester](http://github.com/nathanvda/on_the_spot_tester)
+There is an example rails3-project called [on_the_spot_tester](http://github.com/nathanvda/on_the_spot_tester)
 
-## To do
-
-- make sure user can choose to use a select instead of just text or textarea
-- add tests!
 
 ## Note on Patches/Pull Requests
  

@@ -11,9 +11,15 @@ module OnTheSpot
       def can_edit_on_the_spot
         define_method :update_attribute_on_the_spot do
           klass, field, id = params[:id].split('__')
+          select_data = params[:select_array]
           object = klass.camelize.constantize.find(id)
           object.update_attribute(field, params[:value])
-          render :text => CGI::escapeHTML(object.send(field).to_s)
+          if select_data.nil?
+            render :text => CGI::escapeHTML(object.send(field).to_s)
+          else
+            parsed_data = JSON.parse(select_data.gsub("'", '"'))
+            render :text => parsed_data[object.send(field).to_s]
+          end
         end
       end
     end

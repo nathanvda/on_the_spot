@@ -2,4 +2,9 @@ source "http://rubygems.org"
 
 gem "rake"
 gem "jeweler"
-gem "rspec",   ">= 2.0.0.beta.20"
+gem "json_pure"
+
+group :test do
+  gem "rspec",   ">= 2.0.0.rc"
+  gem "actionpack", ">=3.0.0"
+end
