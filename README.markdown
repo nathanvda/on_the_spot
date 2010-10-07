@@ -1,7 +1,6 @@
 # on_the_spot
 
 On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable.
-This is still in progress, but should already be usable for simple text-fields and text-areas.
 
 ## Installation
 
@@ -58,13 +57,13 @@ It should be as simple as that :)
 
 The `on_the_spot_edit` also accepts options:
 
-* `type`    : `textarea` or `select` (none means default edit)
-* `ok_text` : the text for the ok-button
-* `cancel_text` : the text for the cancel-button
-* `tooltip` : the tooltip-text
-* `rows`: for textarea, the number of rows, defaults to 5
-* `columns`: for textarea, the number of columns, defaults to 40
-* `data`: for select, the lookup-data, should be in an array of id-value pairs. E.g. `[[1, 'ok'], [2, 'not ok'], [3, 'not decided']].
+* `:type`    : `:textarea` or `:select` (none means default edit)
+* `:ok_text` : the text for the ok-button
+* `:cancel_text` : the text for the cancel-button
+* `:tooltip` : the tooltip-text
+* `:rows`: for textarea, the number of rows, defaults to 5
+* `:columns`: for textarea, the number of columns, defaults to 40
+* `:data`: for select, the lookup-data, should be in an array of id-value pairs. E.g. `[[1, 'ok'], [2, 'not ok'], [3, 'not decided']]`.
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
