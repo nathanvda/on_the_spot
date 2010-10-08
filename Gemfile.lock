@@ -47,6 +47,9 @@ GEM
       rspec-expectations (= 2.0.0.rc)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
+    simplecov (0.3.6)
+      simplecov-html (>= 0.3.7)
+    simplecov-html (0.3.8)
     tzinfo (0.3.23)
 
 PLATFORMS
@@ -55,5 +58,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (>= 3.0.0)
   jeweler
+  json_pure
   rake
   rspec (>= 2.0.0.rc)
+  simplecov

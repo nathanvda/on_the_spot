@@ -37,7 +37,7 @@ describe "OnTheSpot" do
       end
     end
 
-    context "creating a simple edit-field" do
+    context "the helpers" do
       before(:each) do
         @dummy = mock()
         @dummy.stub!(:content).and_return('test')
@@ -46,10 +46,21 @@ describe "OnTheSpot" do
         @tester.should_receive(:t).with('on_the_spot.cancel').and_return("cancel")
         @tester.should_receive(:t).with('on_the_spot.tooltip').and_return("tooltip")
         @tester.should_receive(:url_for).and_return('/bla')
-        @result = @tester.on_the_spot_edit @dummy, :content
       end
-      it "should make the correct html" do
+
+      it "should make the correct html for an edit-field" do
+        @result = @tester.on_the_spot_edit @dummy, :content
         @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
+      end
+
+      it "should make the correct html for a text-area" do
+        @result = @tester.on_the_spot_edit @dummy, :content, :type => :textarea
+        @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-columns=\"40\" data-edittype=\"textarea\" data-ok=\"ok\" data-rows=\"5\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
+      end
+
+      it "should make the correct html for a select-box" do
+        @result = @tester.on_the_spot_edit @dummy, :content, :type => :select, :data => [['test', 'This a test'], ['prod', 'Pure Production'], ['QA', 'Quality Assurance']]
+        @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-ok=\"ok\" data-select=\"{ 'test':'This a test', 'prod':'Pure Production', 'QA':'Quality Assurance', 'selected':'test'}\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">This a test</span>"
       end
     end
   end
