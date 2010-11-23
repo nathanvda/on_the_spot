@@ -1,6 +1,6 @@
 # on_the_spot
 
-On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable.
+On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable, and depends on jQuery.
 
 ## Installation
 
@@ -87,6 +87,20 @@ For the texts: if a text is not specified, the default is taken from the `on_the
 
 There is an example rails3-project called [on_the_spot_tester](http://github.com/nathanvda/on_the_spot_tester)
 
+## Prerequisites
+
+As jEditable depends on jQuery, your rails3 project needs to use jQuery.
+It will not work if you use Prototype instead, in your rails3 project.
+I have written an article [here](http://www.dixis.com/?p=307) how to start a fresh rails3 project, using jQuery.
+In short, you add the following to your `Gemfile`:
+
+    gem "jquery-rails"
+
+and, after a `bundle install`, you run
+
+    rails g jquery:install
+
+That will download and install all the necessary files for you.
 
 ## Note on Patches/Pull Requests
  
