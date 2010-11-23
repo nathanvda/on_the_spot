@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{on_the_spot}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Van der Auwera"]
-  s.date = %q{2010-11-05}
+  s.date = %q{2010-11-23}
   s.description = %q{Unobtrusive in place editing, using jEditable; only works in Rails 3}
   s.email = %q{nathan@dixis.com}
   s.extra_rdoc_files = [
