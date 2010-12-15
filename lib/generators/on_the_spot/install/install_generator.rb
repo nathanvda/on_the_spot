@@ -5,12 +5,11 @@ module OnTheSpot
       desc "This generator installs jEditable and some glue javascript"
 
       def download_jeditable
-        # Downloading latest jQuery
+        # Downloading latest jEditable
         get "http://www.appelsiini.net/download/jquery.jeditable.mini.js", "public/javascripts/jquery.jeditable.mini.js"
       end
 
       def copy_glue_javascript
-        # !!!!! TO DO: check this -> how do a copy?
         copy_file "on_the_spot.js", "public/javascripts/on_the_spot.js"
         copy_file "on_the_spot.en.yml", "config/locales/on_the_spot.en.yml"
       end
