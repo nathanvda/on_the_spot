@@ -61,6 +61,7 @@ The `on_the_spot_edit` also accepts options:
 * `:ok_text` : the text for the ok-button
 * `:cancel_text` : the text for the cancel-button
 * `:tooltip` : the tooltip-text
+* `:placeholder` : the placeholder text, defaults to the tooltip-text
 * `:rows`: for textarea, the number of rows, defaults to 5
 * `:columns`: for textarea, the number of columns, defaults to 40
 * `:data`: for select, the lookup-data, should be in an array of id-value pairs. E.g. `[[1, 'ok'], [2, 'not ok'], [3, 'not decided']]`.

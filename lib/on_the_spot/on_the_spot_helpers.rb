@@ -10,6 +10,7 @@ module OnTheSpot
     #   ok_text     : the ok-button text
     #   cancel_text : the cancel-button text
     #   tooltip     : the tooltip to show
+    #   placeholder : the placeholder to show
     #   type        : {'textarea' || 'select' }
     #   rows        : nr of rows for textarea
     #   columns     : nr of columns for textarea
@@ -28,6 +29,7 @@ module OnTheSpot
       options.reverse_merge!(:ok_text     => t('on_the_spot.ok'),
                              :cancel_text => t('on_the_spot.cancel'),
                              :tooltip     => t('on_the_spot.tooltip'),
+                             :placeholder => t('on_the_spot.placeholder'),
                              :rows        => 5,
                              :columns     => 40
                             )
@@ -59,6 +61,7 @@ module OnTheSpot
       html_options[:'data-ok']          = options[:ok_text]
       html_options[:'data-cancel']      = options[:cancel_text]
       html_options[:'data-tooltip']     = options[:tooltip]
+      html_options[:'data-placeholder'] = options[:placeholder]
 
       content_tag("span", html_options) do
         if editable_type == :select
