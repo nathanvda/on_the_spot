@@ -29,7 +29,7 @@ module OnTheSpot
       options.reverse_merge!(:ok_text     => t('on_the_spot.ok'),
                              :cancel_text => t('on_the_spot.cancel'),
                              :tooltip     => t('on_the_spot.tooltip'),
-                             :placeholder => t('on_the_spot.placeholder'),
+                             :placeholder => t('on_the_spot.placeholder') || nil,
                              :rows        => 5,
                              :columns     => 40
                             )
