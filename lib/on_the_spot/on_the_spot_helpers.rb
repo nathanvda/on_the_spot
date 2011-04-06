@@ -15,10 +15,10 @@ module OnTheSpot
     #   columns     : nr of columns for textarea
     #   loadurl     : (for select) an url that will return the json for the select
     #   data        : (for select) an array of options in the form [id, value]
+    #   url         : (optional) URL to post to if you don't want to use the standard routes
     def on_the_spot_edit(object, field, options={})
       #!!! to do: translate options to data-fields
       # Possible fields:
-      #  url?
       #  type: textarea or not
       #  button-translations ok-Text, cancel-Text
       #
@@ -29,10 +29,12 @@ module OnTheSpot
                              :cancel_text => t('on_the_spot.cancel'),
                              :tooltip     => t('on_the_spot.tooltip'),
                              :rows        => 5,
-                             :columns     => 40
+                             :columns     => 40,
+                             :url         => {:action => 'update_attribute_on_the_spot'}
+                             
                             )
 
-      update_url = url_for(:action => 'update_attribute_on_the_spot')
+      update_url = url_for(options[:url])
 
       field_value =  object.send(field.to_sym).to_s
 
