@@ -7,15 +7,16 @@ module OnTheSpot
     class OnTheSpotMissingParameters < StandardError; end
 
     # Possible options:
-    #   ok_text     : the ok-button text
-    #   cancel_text : the cancel-button text
-    #   tooltip     : the tooltip to show
-    #   type        : {'textarea' || 'select' }
-    #   rows        : nr of rows for textarea
-    #   columns     : nr of columns for textarea
-    #   loadurl     : (for select) an url that will return the json for the select
-    #   data        : (for select) an array of options in the form [id, value]
-    #   url         : (optional) URL to post to if you don't want to use the standard routes
+    #   ok_text      : the ok-button text
+    #   cancel_text  : the cancel-button text
+    #   tooltip      : the tooltip to show
+    #   type         : {'textarea' || 'select' }
+    #   rows         : nr of rows for textarea
+    #   columns      : nr of columns for textarea
+    #   loadurl      : (for select) an url that will return the json for the select
+    #   display_text : either overrule the normal display-value, or needed when using loadurl
+    #   data         : (for select) an array of options in the form [id, value]
+    #   url          : (optional) URL to post to if you don't want to use the standard routes
     def on_the_spot_edit(object, field, options={})
       #!!! to do: translate options to data-fields
       # Possible fields:
@@ -63,7 +64,9 @@ module OnTheSpot
       html_options[:'data-tooltip']     = options[:tooltip]
 
       content_tag("span", html_options) do
-        if editable_type == :select
+        if options[:display_text]
+          options[:display_text]
+        elsif editable_type == :select && options[:loadurl].nil?
           lookup_display_value(select_data, field_value)
         else
           field_value
