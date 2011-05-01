@@ -62,6 +62,7 @@ module OnTheSpot
       html_options[:'data-ok']          = options[:ok_text]
       html_options[:'data-cancel']      = options[:cancel_text]
       html_options[:'data-tooltip']     = options[:tooltip]
+      html_options[:'data-auth']        = form_authenticity_token if defined? form_authenticity_token
 
       content_tag("span", html_options) do
         if options[:display_text]
