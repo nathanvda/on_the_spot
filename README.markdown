@@ -16,7 +16,7 @@ Inside your `routes.rb` you need to provide the following route:
 
     resources :posts do
       collection do
-        post :update_attribute_on_the_spot
+        put :update_attribute_on_the_spot
       end
     end
 
