@@ -21,7 +21,11 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
+
 RSpec::Core::RakeTask.new(:spec)
+
+task :default => :spec
+
 
 desc  "Run all specs with rcov"
 RSpec::Core::RakeTask.new("test_cov") do |t|
