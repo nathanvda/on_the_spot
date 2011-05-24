@@ -17,6 +17,7 @@ module OnTheSpot
     #   display_text : either overrule the normal display-value, or needed when using loadurl
     #   data         : (for select) an array of options in the form [id, value]
     #   url          : (optional) URL to post to if you don't want to use the standard routes
+    #   selected     : (optional) boolean, text selected on edit
     def on_the_spot_edit(object, field, options={})
       #!!! to do: translate options to data-fields
       # Possible fields:
@@ -63,7 +64,8 @@ module OnTheSpot
       html_options[:'data-cancel']      = options[:cancel_text]
       html_options[:'data-tooltip']     = options[:tooltip]
       html_options[:'data-auth']        = form_authenticity_token if defined? form_authenticity_token
-
+      html_options[:'data-selected']    = options[:selected]
+        
       content_tag("span", html_options) do
         if options[:display_text]
           options[:display_text]
