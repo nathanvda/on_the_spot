@@ -56,6 +56,11 @@ describe "OnTheSpot" do
           @result = @tester.on_the_spot_edit @dummy, :content
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
         end
+        
+        it "should make the correct html for an edit-field with text selected on click" do
+          @result = @tester.on_the_spot_edit @dummy, :content, :selected => true
+          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-selected=\"true\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
+        end
 
         it "should make the correct html for an edit-field and overrule display-text" do
           @result = @tester.on_the_spot_edit @dummy, :content, :display_text => 'jediknight'
@@ -65,6 +70,11 @@ describe "OnTheSpot" do
         it "should make the correct html for a text-area" do
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :textarea
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-columns=\"40\" data-edittype=\"textarea\" data-ok=\"ok\" data-rows=\"5\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
+        end
+        
+        it "should make the correct html for a text-area with text selected on click" do
+          @result = @tester.on_the_spot_edit @dummy, :content, :type => :textarea, :selected => true
+          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-columns=\"40\" data-edittype=\"textarea\" data-ok=\"ok\" data-rows=\"5\" data-selected=\"true\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
         end
 
         it "should make the correct html for a select-box" do

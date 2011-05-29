@@ -67,6 +67,7 @@ The `on_the_spot_edit` also accepts options:
 * `:data`: for select, the lookup-data, should be in an array of id-value pairs. E.g. `[[1, 'ok'], [2, 'not ok'], [3, 'not decided']]`.
 * `:loadurl`: for select, an url that will return the data in JSON format (use instead of `:data`)
 * `:url`: URL to post to if you don't want to use the standard routes
+* `:selected`: Text selected by default on edit (boolean, default is false)
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
