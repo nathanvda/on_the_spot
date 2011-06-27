@@ -68,7 +68,7 @@ The `on_the_spot_edit` also accepts options:
 * `:loadurl`: for select, an url that will return the data in JSON format (use instead of `:data`)
 * `:url`: URL to post to if you don't want to use the standard routes
 * `:selected`: Text selected by default on edit (boolean, default is false)
-* `:callback`: A javascript function that is called after form has been submitted
+* `:callback`: The name of a javascript function that is called after form has been submitted 
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
@@ -86,6 +86,17 @@ For the texts: if a text is not specified, the default is taken from the `on_the
 ### Select-box
 
     <%= on_the_spot_edit @user, :rating, :type => :select, :data => [[1, 'good'], [2, 'mediocre'], [3, 'bad']] %>
+
+### Callback
+
+    Somewhere in a .js file:
+    function testCallback(object, value, settings) {
+      console.log(object);
+      console.log(value);
+      console.log(settings);
+    }
+
+    <%= on_the_spot_edit @user, :name, :callback => 'testCallback' %>
 
 
 ## Example project
