@@ -18,6 +18,7 @@ module OnTheSpot
     #   data         : (for select) an array of options in the form [id, value]
     #   url          : (optional) URL to post to if you don't want to use the standard routes
     #   selected     : (optional) boolean, text selected on edit
+    #   callback     : (optional) a javascript function that is called after form has been submitted
     def on_the_spot_edit(object, field, options={})
       #!!! to do: translate options to data-fields
       # Possible fields:
@@ -65,6 +66,7 @@ module OnTheSpot
       html_options[:'data-tooltip']     = options[:tooltip]
       html_options[:'data-auth']        = form_authenticity_token if defined? form_authenticity_token
       html_options[:'data-selected']    = options[:selected]
+      html_options[:'data-callback']    = options[:callback]
         
       content_tag("span", html_options) do
         if options[:display_text]
