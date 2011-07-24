@@ -20,4 +20,6 @@ coverage
 rdoc
 pkg
 
-## PROJECT::SPECIFIC
+spec/tmp/
+spec/dummy/log/
+spec/dummy/db/*.sqlite3

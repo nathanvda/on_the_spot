@@ -2,7 +2,7 @@ require 'on_the_spot/controller_extension'
 require 'on_the_spot/on_the_spot_helpers'
 
 module OnTheSpot
-  class Railtie < ::Rails::Railtie
+  class Engine < ::Rails::Engine
 
     config.before_initialize do
       config.action_view.javascript_expansions[:on_the_spot] = %w(jquery.jeditable.mini.js on_the_spot)
