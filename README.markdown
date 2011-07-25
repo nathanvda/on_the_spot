@@ -1,6 +1,6 @@
 # on_the_spot
 
-[![Build Status](http://travis-ci.org/[nathanvda]/[on_the_spot].png)](http://travis-ci.org/[nathanvda]/[on_the_spot])
+[![Build Status](http://travis-ci.org/nathanvda/on_the_spot.png)](http://travis-ci.org/nathanvda/on_the_spot)
 
 On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable, and depends on jQuery.
 
