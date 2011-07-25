@@ -7,9 +7,10 @@ describe OnTheSpot::Generators::InstallGenerator do
 
   destination File.expand_path("../../tmp", __FILE__)
 
+
   context "in rails 3.0" do
     context "with no arguments" do
-      before(:all) do
+      before(:each) do
         ::Rails.stub(:version) { '3.0.8' }
         prepare_destination
         run_generator
@@ -32,7 +33,7 @@ describe OnTheSpot::Generators::InstallGenerator do
 
   context "in rails 3.1" do
     context "with no arguments" do
-      before(:all) do
+      before(:each) do
         ::Rails.stub(:version) { '3.1.0' }
         prepare_destination
         run_generator
