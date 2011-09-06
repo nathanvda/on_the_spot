@@ -9,12 +9,30 @@ On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin
 Inside your `Gemfile` add the following:
 
     gem "on_the_spot"
+    
+### Rails 3.1
+
+Add the following to application.js so it compiles to the asset_pipeline
+
+    //= require cocoon
+
+### Rails 3.0.x
 
 Run the installation task:
 
     rails g on_the_spot:install
 
-Inside your `routes.rb` you need to provide the following route:
+Inside your `application.html.haml` you will need to add below the default javascripts:
+
+    = javascript_include_tag :on_the_spot
+
+or using erb, you write
+
+    <%= javascript_include_tag :on_the_spot %>
+
+### Routes (for all Rails 3 versions)
+
+Inside your `routes.rb` you need to provide the following route :
 
     resources :posts do
       collection do
@@ -25,13 +43,6 @@ Inside your `routes.rb` you need to provide the following route:
 You need to do this for each controller that uses the on-the-spot editing.
 For the moment i do not know of any better solution, but i am always open for suggestions!
 
-Inside your `application.html.haml` you will need to add below the default javascripts:
-
-    = javascript_include_tag :on_the_spot
-
-or using erb, you write
-
-    <%= javascript_include_tag :on_the_spot %>
 
 That is all you need to do to start using it!
 
