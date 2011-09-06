@@ -14,7 +14,7 @@ Inside your `Gemfile` add the following:
 
 Add the following to application.js so it compiles to the asset_pipeline
 
-    //= require cocoon
+    //= require on_the_spot
 
 ### Rails 3.0.x
 
