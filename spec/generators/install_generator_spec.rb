@@ -1,6 +1,10 @@
 require 'spec_helper'
+
+
 require 'generator_spec/test_case'
 require 'generators/on_the_spot/install/install_generator'
+
+require 'rspec/mocks'
 
 describe OnTheSpot::Generators::InstallGenerator do
   include GeneratorSpec::TestCase
@@ -11,7 +15,7 @@ describe OnTheSpot::Generators::InstallGenerator do
   context "in rails 3.0" do
     context "with no arguments" do
       before(:each) do
-        ::Rails.stub(:version) { '3.0.8' }
+        Rails.stub(:version) { '3.0.8' }
         prepare_destination
         run_generator
       end
@@ -34,7 +38,7 @@ describe OnTheSpot::Generators::InstallGenerator do
   context "in rails 3.1" do
     context "with no arguments" do
       before(:each) do
-        ::Rails.stub(:version) { '3.1.0' }
+        Rails.stub(:version) { '3.1.0' }
         prepare_destination
         run_generator
       end
