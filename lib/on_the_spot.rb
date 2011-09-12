@@ -5,7 +5,7 @@ module OnTheSpot
   class Engine < ::Rails::Engine
 
     config.before_initialize do
-      config.action_view.javascript_expansions[:on_the_spot] = %w(jquery.jeditable.mini.js on_the_spot)
+      config.action_view.javascript_expansions[:on_the_spot] = %w(jquery.jeditable.mini.js on_the_spot_code)
     end
 
     # configure our plugin on boot. other extension points such
