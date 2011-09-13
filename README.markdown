@@ -10,17 +10,24 @@ Inside your `Gemfile` add the following:
 
     gem "on_the_spot"
     
+Run the installation task:
+
+    rails g on_the_spot:install
+    
+This will copy the default translation files, and for rails 3.0 it will also copy the needed assets (javascript files).
+    
 ### Rails 3.1
 
 Add the following to application.js so it compiles to the asset_pipeline
 
     //= require on_the_spot
+    
+Or, inside your `application.html.haml` you could still include the needed javascripts, using
+
+    = javascript_include_tag :on_the_spot
+
 
 ### Rails 3.0.x
-
-Run the installation task:
-
-    rails g on_the_spot:install
 
 Inside your `application.html.haml` you will need to add below the default javascripts:
 
