@@ -15,6 +15,7 @@ module OnTheSpot
         else
           copy_file "../../../../../app/assets/javascripts/on_the_spot.js", "public/javascripts/on_the_spot.js"
           copy_file "../../../../../app/assets/javascripts/jquery.jeditable.mini.js", "public/javascripts/jquery.jeditable.mini.js"
+          copy_file "../../../../../app/assets/javascripts/jquery.jeditable.checkbox.js", "public/javascripts/jquery.jeditable.checkbox.js"
         end
       end
 
