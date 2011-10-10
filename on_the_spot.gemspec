@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "0.0.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Nathan Van der Auwera"]
-  s.date = %q{2011-09-13}
+  s.authors = [%q{Nathan Van der Auwera}]
+  s.date = %q{2011-10-10}
   s.description = %q{Unobtrusive in place editing, using jEditable; only works in Rails 3}
   s.email = %q{nathan@dixis.com}
   s.extra_rdoc_files = [
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "README.markdown",
     "Rakefile",
     "VERSION",
+    "app/assets/javascripts/jquery.jeditable.checkbox.js",
     "app/assets/javascripts/jquery.jeditable.mini.js",
     "app/assets/javascripts/on_the_spot.js",
     "app/assets/javascripts/on_the_spot_code.js",
@@ -76,8 +77,8 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/nathanvda/on_the_spot}
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.6}
   s.summary = %q{unobtrusive in place editing}
 
   if s.respond_to? :specification_version then
