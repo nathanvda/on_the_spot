@@ -1,5 +1,18 @@
 # Change History / Release Notes
 
+## Version 0.0.15 (12/10/2011)
+
+* added support for checkboxes (thanks to Peter Savichev)
+
+## Version 0.0.14 (13/9/2011)
+
+* Fixed bugs #17 and #20
+* Improved rails 3.1 compatibility
+
+## Version 0.0.13 (24/7/2011)
+
+* Made on_the_spot rails 3.1 compatible
+
 ## Version 0.0.12 (02/07/2011)
 
 * Added the option to execute a callback after editing
