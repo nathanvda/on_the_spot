@@ -1,6 +1,6 @@
 # Change History / Release Notes
 
-## Version 0.0.15 (12/10/2011)
+## Version 0.0.16 (12/10/2011)
 
 * added support for checkboxes (thanks to Peter Savichev)
 
