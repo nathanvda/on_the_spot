@@ -56,7 +56,7 @@ describe "OnTheSpot" do
           @result = @tester.on_the_spot_edit @dummy, :content
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
         end
-        
+
         it "should make the correct html for an edit-field with text selected on click" do
           @result = @tester.on_the_spot_edit @dummy, :content, :selected => true
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-selected=\"true\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
@@ -71,7 +71,7 @@ describe "OnTheSpot" do
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :textarea
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-columns=\"40\" data-edittype=\"textarea\" data-ok=\"ok\" data-rows=\"5\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
         end
-        
+
         it "should make the correct html for a text-area with text selected on click" do
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :textarea, :selected => true
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-columns=\"40\" data-edittype=\"textarea\" data-ok=\"ok\" data-rows=\"5\" data-selected=\"true\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
@@ -81,7 +81,13 @@ describe "OnTheSpot" do
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :select, :data => [['test', 'This a test'], ['prod', 'Pure Production'], ['QA', 'Quality Assurance']]
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-ok=\"ok\" data-select=\"{ 'test':'This a test', 'prod':'Pure Production', 'QA':'Quality Assurance', 'selected':'test'}\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">This a test</span>"
         end
-        
+
+        it "should make the correct html for a checkbox" do
+          @dummy.stub!(:content).and_return(true)
+          @result = @tester.on_the_spot_edit @dummy, :content, :type => :checkbox
+          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"checkbox\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">true</span>"
+        end
+
         it "should make the correct html for an edit-field with a callback" do
           @result = @tester.on_the_spot_edit @dummy, :content, :callback => 'testCallback(value, settings);'
           @result.should == "<span class=\"on_the_spot_editing\" data-callback=\"testCallback(value, settings);\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
