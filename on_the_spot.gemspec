@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "0.0.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Nathan Van der Auwera"]
-  s.date = %q{2011-09-13}
+  s.authors = [%q{Nathan Van der Auwera}, %q{Peter Savichev (proton)}]
+  s.date = %q{2011-10-11}
   s.description = %q{Unobtrusive in place editing, using jEditable; only works in Rails 3}
   s.email = %q{nathan@dixis.com}
   s.extra_rdoc_files = [
@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.files = [
     ".bundle/config",
     ".document",
+    ".rspec",
+    ".rvmrc",
     ".travis.yml",
     "Gemfile",
     "Gemfile.lock",
@@ -27,6 +29,7 @@ Gem::Specification.new do |s|
     "README.markdown",
     "Rakefile",
     "VERSION",
+    "app/assets/javascripts/jquery.jeditable.checkbox.js",
     "app/assets/javascripts/jquery.jeditable.mini.js",
     "app/assets/javascripts/on_the_spot.js",
     "app/assets/javascripts/on_the_spot_code.js",
@@ -76,26 +79,53 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/nathanvda/on_the_spot}
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.6}
   s.summary = %q{unobtrusive in place editing}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>, [">= 2.0.0rc"])
-      s.add_development_dependency(%q<actionpack>, [">= 3.0.0"])
       s.add_runtime_dependency(%q<json_pure>, [">= 1.4.6"])
+      s.add_development_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_development_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_development_dependency(%q<rails>, [">= 3.0.9"])
+      s.add_development_dependency(%q<actionpack>, [">= 3.0.0"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3-ruby>, [">= 0"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_development_dependency(%q<generator_spec>, [">= 0"])
     else
-      s.add_dependency(%q<rspec>, [">= 2.0.0rc"])
-      s.add_dependency(%q<actionpack>, [">= 3.0.0"])
       s.add_dependency(%q<json_pure>, [">= 1.4.6"])
+      s.add_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_dependency(%q<rails>, [">= 3.0.9"])
+      s.add_dependency(%q<actionpack>, [">= 3.0.0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
+      s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<generator_spec>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rspec>, [">= 2.0.0rc"])
-    s.add_dependency(%q<actionpack>, [">= 3.0.0"])
     s.add_dependency(%q<json_pure>, [">= 1.4.6"])
+    s.add_dependency(%q<rake>, ["= 0.8.7"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+    s.add_dependency(%q<rspec>, [">= 2.0.0"])
+    s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+    s.add_dependency(%q<rails>, [">= 3.0.9"])
+    s.add_dependency(%q<actionpack>, [">= 3.0.0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
+    s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<generator_spec>, [">= 0"])
   end
 end
 

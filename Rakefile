@@ -10,11 +10,9 @@ begin
     gem.description = %Q{Unobtrusive in place editing, using jEditable; only works in Rails 3}
     gem.email = "nathan@dixis.com"
     gem.homepage = "http://github.com/nathanvda/on_the_spot"
-    gem.authors = ["Nathan Van der Auwera"]
-    gem.add_development_dependency "rspec", ">= 2.0.0rc"
-    gem.add_development_dependency "actionpack", ">= 3.0.0"
-    gem.add_dependency "json_pure", ">= 1.4.6"
+    gem.authors = ["Nathan Van der Auwera", "Peter Savichev (proton)"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    # dependencies defined in Gemfile
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

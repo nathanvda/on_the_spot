@@ -9,19 +9,19 @@ On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin
 Inside your `Gemfile` add the following:
 
     gem "on_the_spot"
-    
+
 Run the installation task:
 
     rails g on_the_spot:install
-    
+
 This will copy the default translation files, and for rails 3.0 it will also copy the needed assets (javascript files).
-    
+
 ### Rails 3.1
 
 Add the following to application.js so it compiles to the asset_pipeline
 
     //= require on_the_spot
-    
+
 Or, inside your `application.html.haml` you could still include the needed javascripts, using
 
     = javascript_include_tag :on_the_spot
@@ -77,7 +77,7 @@ It should be as simple as that :)
 
 The `on_the_spot_edit` also accepts options:
 
-* `:type`    : `:textarea` or `:select` (none means default edit)
+* `:type`    : `:textarea`, `:select` or `:checkbox` (none means default edit)
 * `:ok_text` : the text for the ok-button
 * `:cancel_text` : the text for the cancel-button
 * `:display_text`: if you want to overrule the displayed text, especially useful when using your own `:url` or `:loadurl`
@@ -88,7 +88,7 @@ The `on_the_spot_edit` also accepts options:
 * `:loadurl`: for select, an url that will return the data in JSON format (use instead of `:data`)
 * `:url`: URL to post to if you don't want to use the standard routes
 * `:selected`: Text selected by default on edit (boolean, default is false)
-* `:callback`: The name of a javascript function that is called after form has been submitted 
+* `:callback`: The name of a javascript function that is called after form has been submitted
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
@@ -139,7 +139,7 @@ and, after a `bundle install`, you run
 That will download and install all the necessary files for you.
 
 ## Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
