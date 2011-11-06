@@ -11,19 +11,21 @@ $(document).ready(function() {
 });
 
 function initializeOnTheSpot(n){
-    var el           = $(this),
-        auth_token   = el.attr('data-auth'),
-        data_url     = el.attr('data-url'),
-        ok_text      = el.attr('data-ok') || 'OK',
-        cancel_text  = el.attr('data-cancel') || 'Cancel',
-        tooltip_text = el.attr('data-tooltip') || 'Click to edit ...',
-        edit_type    = el.attr('data-edittype'),
-        select_data  = el.attr('data-select'),
-        rows         = el.attr('data-rows'),
-        columns      = el.attr('data-columns'),
-        load_url     = el.attr('data-loadurl'),
-        selected     = el.attr('data-selected'),
-        callback     = el.attr('data-callback');
+    var el            = $(this),
+        auth_token    = el.attr('data-auth'),
+        data_url      = el.attr('data-url'),
+        ok_text       = el.attr('data-ok') || 'OK',
+        cancel_text   = el.attr('data-cancel') || 'Cancel',
+        tooltip_text  = el.attr('data-tooltip') || 'Click to edit ...',
+        edit_type     = el.attr('data-edittype'),
+        select_data   = el.attr('data-select'),
+        rows          = el.attr('data-rows'),
+        columns       = el.attr('data-columns'),
+        load_url      = el.attr('data-loadurl'),
+        selected      = el.attr('data-selected'),
+        onblur_action = el.attr('data-onblur') || 'cancel',
+        callback      = el.attr('data-callback');
+
 
     var options = {
         tooltip: tooltip_text,
@@ -36,6 +38,8 @@ function initializeOnTheSpot(n){
             //just show the error-msg for now
             alert(xhr.responseText);
         },
+        loadurl: load_url,
+        onblur: onblur_action,
         submitdata: {
           authenticity_token: auth_token,
           _method: 'put'

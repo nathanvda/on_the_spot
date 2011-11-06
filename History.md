@@ -1,5 +1,10 @@
 # Change History / Release Notes
 
+## Version 0.0.17 (1/11/2011)
+
+* added support for `onblur` action: when focus is lost, allow to autosave.
+* make sure that the loadurl can also work if not using a select. This allows the usage of TinyMCE, Markdown or otherwise formatted editable content.
+
 ## Version 0.0.16 (12/10/2011)
 
 * added support for checkboxes (thanks to Peter Savichev)

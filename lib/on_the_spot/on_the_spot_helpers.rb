@@ -34,7 +34,6 @@ module OnTheSpot
                              :rows        => 5,
                              :columns     => 40,
                              :url         => {:action => 'update_attribute_on_the_spot'}
-                             
                             )
 
       update_url = url_for(options[:url])
@@ -47,16 +46,11 @@ module OnTheSpot
 
       editable_type = options[:type].nil? ? nil : options[:type].to_sym
       html_options[:'data-edittype']    = editable_type.to_s unless editable_type.nil?
-      if editable_type == :select
-        # we need either a data or loadurl
-        unless options[:loadurl].nil?
-          html_options[:'data-loadurl'] = options[:loadurl]
-        else
-          # we should find a hash
-          select_data = options[:data]
-          raise OnTheSpotMissingParameters.new("Using type select needs either data or loadurl to function!") if select_data.nil?
-          html_options[:'data-select']  = convert_array_to_json(select_data, field_value)
-        end
+      if editable_type == :select && options[:loadurl].nil?
+        # we should find a hash
+        select_data = options[:data]
+        raise OnTheSpotMissingParameters.new("Using type select needs either data or loadurl to function!") if select_data.nil?
+        html_options[:'data-select']  = convert_array_to_json(select_data, field_value)
       elsif editable_type == :textarea
         html_options[:'data-rows']      = options[:rows]
         html_options[:'data-columns']   = options[:columns]
@@ -67,12 +61,14 @@ module OnTheSpot
       html_options[:'data-auth']        = form_authenticity_token if defined? form_authenticity_token
       html_options[:'data-selected']    = options[:selected]
       html_options[:'data-callback']    = options[:callback]
+      html_options[:'data-onblur']      = options[:onblur] if options[:onblur] && ['cancel','submit', 'ignore'].include?(options[:onblur])
+      html_options[:'data-loadurl']     = options[:loadurl] unless options[:loadurl].nil?
         
       content_tag("span", html_options) do
         if options[:display_text]
           options[:display_text]
         elsif editable_type == :select && options[:loadurl].nil?
-          lookup_display_value(select_data, field_value)
+          lookup_display_valuex(select_data, field_value)
         else
           field_value
         end
