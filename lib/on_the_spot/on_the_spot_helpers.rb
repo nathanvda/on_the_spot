@@ -68,7 +68,7 @@ module OnTheSpot
         if options[:display_text]
           options[:display_text]
         elsif editable_type == :select && options[:loadurl].nil?
-          lookup_display_valuex(select_data, field_value)
+          lookup_display_value(select_data, field_value)
         else
           field_value
         end
