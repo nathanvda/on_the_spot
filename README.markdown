@@ -89,6 +89,7 @@ The `on_the_spot_edit` also accepts options:
 * `:url`: URL to post to if you don't want to use the standard routes
 * `:selected`: Text selected by default on edit (boolean, default is false)
 * `:callback`: The name of a javascript function that is called after form has been submitted
+* `:raw`: if set to true, evaluate the field value as raw HTML.
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
