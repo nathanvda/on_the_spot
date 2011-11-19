@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
     $(".on_the_spot_editing").mouseover(function() {
-        $(this).css('background-color', '#EEF2A0');
+		$(this).addClass('on_the_spot_over');
     });
     $(".on_the_spot_editing").mouseout(function() {
-        $(this).css('background-color', 'inherit');
+		$(this).removeClass('on_the_spot_over');
     });
     $('.on_the_spot_editing').each(initializeOnTheSpot);
 
@@ -63,5 +63,5 @@ function initializeOnTheSpot(n){
         options.cols = columns;
     }
 
-    el.editable(data_url, options)
+    el.editable(data_url, options);
 }

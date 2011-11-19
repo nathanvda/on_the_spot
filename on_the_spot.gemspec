@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "README.markdown",
     "Rakefile",
     "VERSION",
+    "app/assets/css/on_the_spot.js",
     "app/assets/javascripts/jquery.jeditable.checkbox.js",
     "app/assets/javascripts/jquery.jeditable.mini.js",
     "app/assets/javascripts/on_the_spot.js",
