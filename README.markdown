@@ -26,6 +26,14 @@ Or, inside your `application.html.haml` you could still include the needed javas
 
     = javascript_include_tag :on_the_spot
 
+To use the default styling, add the following to application.css so it compiles to the asset_pipeline
+
+	//= require on_the_spot
+
+Or, inside your `application.html.haml` you could still include the needed css, using
+
+	= stylesheet_link_tag :on_the_spot
+
 
 ### Rails 3.0.x
 
@@ -36,6 +44,15 @@ Inside your `application.html.haml` you will need to add below the default javas
 or using erb, you write
 
     <%= javascript_include_tag :on_the_spot %>
+
+To use the default styling, inside your `application.html.haml` you will need to add below the default CSS:
+
+    = stylesheet_link_tag :on_the_spot
+
+or using erb, you write
+
+    <%= stylesheet_link_tag :on_the_spot %>
+
 
 ### Routes (for all Rails 3 versions)
 
@@ -92,6 +109,14 @@ The `on_the_spot_edit` also accepts options:
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
+
+## Styling
+
+Each element that is editable will have the `on_the_spot_editing` class.
+
+When an element is moused over, it will get the `on_the_spot_over` class.
+
+You can use these classes to style the elements.
 
 ## Example Usages
 
