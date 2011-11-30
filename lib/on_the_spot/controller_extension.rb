@@ -15,7 +15,8 @@ module OnTheSpot
           object = klass.camelize.constantize.find(id)
           if object.update_attributes(field => params[:value])
             if select_data.nil?
-              render :text => CGI::escapeHTML(object.send(field).to_s)
+              value = object.send(field).to_s
+              render :text => params[:raw] ? value : CGI::escapeHTML(value)
             else
               parsed_data = JSON.parse(select_data.gsub("'", '"'))
               render :text => parsed_data[object.send(field).to_s]
