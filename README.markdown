@@ -144,6 +144,17 @@ You can use these classes to style the elements.
     <%= on_the_spot_edit @user, :name, :callback => 'testCallback' %>
 
 
+## Using together with `cancan`
+
+When using `on_the_spot` together with `cancan`, you will have to explicitly exclude the on_the_spot method,
+like so:
+
+    before_filter :load_and_authorize_resource, :except => [:update_attribute_on_the_spot]
+    
+The `load_and_authorize_resource` will try to find the object, based on the id in the parameters, but `on_the_spot` uses a different
+encoding to store the object, field and id in one attribute. So if you exclude that, there will not be a problem.
+
+
 ## Example project
 
 There is an example rails3-project called [on_the_spot_tester](http://github.com/nathanvda/on_the_spot_tester)
