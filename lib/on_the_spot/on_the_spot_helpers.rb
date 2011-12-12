@@ -20,14 +20,6 @@ module OnTheSpot
     #   selected     : (optional) boolean, text selected on edit
     #   callback     : (optional) a javascript function that is called after form has been submitted
     def on_the_spot_edit(object, field, options={})
-      #!!! to do: translate options to data-fields
-      # Possible fields:
-      #  type: textarea or not
-      #  button-translations ok-Text, cancel-Text
-      #
-
-
-
       options.reverse_merge!(:ok_text     => t('on_the_spot.ok'),
                              :cancel_text => t('on_the_spot.cancel'),
                              :tooltip     => t('on_the_spot.tooltip'),
@@ -52,21 +44,27 @@ module OnTheSpot
         raise OnTheSpotMissingParameters.new("Using type select needs either data or loadurl to function!") if select_data.nil?
         html_options[:'data-select']  = convert_array_to_json(select_data, field_value)
       elsif editable_type == :textarea
-        html_options[:'data-rows']      = options[:rows]
-        html_options[:'data-columns']   = options[:columns]
+        html_options[:'data-rows']         = options[:rows]
+        html_options[:'data-columns']      = options[:columns]
       end
-      html_options[:'data-ok']          = options[:ok_text]
-      html_options[:'data-cancel']      = options[:cancel_text]
-      html_options[:'data-tooltip']     = options[:tooltip]
-      html_options[:'data-auth']        = form_authenticity_token if defined? form_authenticity_token
-      html_options[:'data-selected']    = options[:selected]
-      html_options[:'data-callback']    = options[:callback]
-      html_options[:'data-onblur']      = options[:onblur] if options[:onblur] && ['cancel','submit', 'ignore'].include?(options[:onblur])
-      html_options[:'data-loadurl']     = options[:loadurl] unless options[:loadurl].nil?
+      html_options[:'data-ok']             = options[:ok_text]
+      html_options[:'data-cancel']         = options[:cancel_text]
+      html_options[:'data-tooltip']        = options[:tooltip]
+      html_options[:'data-auth']           = form_authenticity_token if defined? form_authenticity_token
+      html_options[:'data-selected']       = options[:selected]
+      html_options[:'data-callback']       = options[:callback]
+      html_options[:'data-onblur']         = options[:onblur] if options[:onblur] && ['cancel','submit', 'ignore'].include?(options[:onblur])
+      html_options[:'data-loadurl']        = options[:loadurl] unless options[:loadurl].nil?
+      html_options[:'data-display-method'] = options[:display_method] unless options[:display_method].nil?
+      if html_options[:'data-display-method'].present? && html_options[:'data-loadurl'].nil?
+        html_options[:'data-loadurl'] = url_for(:action => 'get_attribute_on_the_spot')
+      end
         
       content_tag("span", html_options) do
         if options[:display_text]
           options[:display_text]
+        elsif options[:display_method]
+          object.send(options[:display_method].to_sym).to_s
         elsif editable_type == :select && options[:loadurl].nil?
           lookup_display_value(select_data, field_value)
         else

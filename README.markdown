@@ -4,6 +4,17 @@
 
 On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable, and depends on jQuery.
 
+## Features
+
+* built on proven jQuery plugin `jEditable`
+* works on index-pages, nested objects, ...
+* can generate simple edit-boxes, textareas, dropdown lists, checkboxes
+* will check your server-side validations and show the error
+* you can check the access-rights before doing any update (to check against tampering)
+* you can use custom display methods, e.g when using markdown
+* watch the demo-project [here]() ([source](https://github.com/nathanvda/on_the_spot_tester))
+
+
 ## Installation
 
 Inside your `Gemfile` add the following:
@@ -61,12 +72,14 @@ Inside your `routes.rb` you need to provide the following route :
     resources :posts do
       collection do
         put :update_attribute_on_the_spot
+        get :get_attribute_on_the_spot
       end
     end
 
 You need to do this for each controller that uses the on-the-spot editing.
-For the moment i do not know of any better solution, but i am always open for suggestions!
 
+You only need to specify the route for `get_attribute_on_the_spot` if you make use of the `:display_method` option,
+and do not want to supply your own load-function.
 
 That is all you need to do to start using it!
 
@@ -106,6 +119,9 @@ The `on_the_spot_edit` also accepts options:
 * `:url`: URL to post to if you don't want to use the standard routes
 * `:selected`: Text selected by default on edit (boolean, default is false)
 * `:callback`: The name of a javascript function that is called after form has been submitted
+* `:display_method`: the name of a method that is used to get the value to display of a field. When you use this, we will automatically
+   attempt to look up the raw value of the field to edit.  This differs from the `:display_text` option, as this will also be called after update.
+   This supersedes the `:display_text` option.
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
@@ -153,6 +169,20 @@ like so:
     
 The `load_and_authorize_resource` will try to find the object, based on the id in the parameters, but `on_the_spot` uses a different
 encoding to store the object, field and id in one attribute. So if you exclude that, there will not be a problem.
+
+
+## Using together with an authorization system (e.g. Cancan)
+
+If you want to test access-rights, you can do so by specifying a method which will be called
+
+In your controller write:
+
+    can_edit_on_the_spot :check_access
+
+    def check_access(object, field)
+      # verify that the current user has access to edit/see the field of given object
+    end
+
 
 
 ## Example project

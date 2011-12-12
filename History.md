@@ -1,5 +1,10 @@
 # Change History / Release Notes
 
+## Version 0.0.18 (11/12/2011)
+
+* added support for a `:display_method` which will make working with formatted editable content much easier
+* added the option to specify a function to verify the access
+
 ## Version 0.0.17 (1/11/2011)
 
 * added support for `onblur` action: when focus is lost, allow to autosave.

@@ -67,6 +67,23 @@ describe "OnTheSpot" do
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">jediknight</span>"
         end
 
+        it "makes the correct html for an edit-field and use the display-method as string" do
+          @dummy.should_receive(:changed_content).and_return("test-changed")
+          @tester.should_receive(:url_for).with({:action => 'get_attribute_on_the_spot'}).and_return('/bla-again')
+
+          @result = @tester.on_the_spot_edit @dummy, :content, :display_method => 'changed_content'
+          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-display-method=\"changed_content\" data-loadurl=\"/bla-again\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test-changed</span>"
+        end
+
+        it "makes the correct html for an edit-field and use the display-method (as symbol)" do
+          @dummy.should_receive(:changed_content).and_return("test-changed")
+          @tester.should_receive(:url_for).with({:action => 'get_attribute_on_the_spot'}).and_return('/bla-again')
+
+          @result = @tester.on_the_spot_edit @dummy, :content, :display_method => :changed_content
+          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-display-method=\"changed_content\" data-loadurl=\"/bla-again\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test-changed</span>"
+        end
+
+
         it "makes the correct html for a text-area" do
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :textarea
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-columns=\"40\" data-edittype=\"textarea\" data-ok=\"ok\" data-rows=\"5\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
@@ -109,7 +126,7 @@ describe "OnTheSpot" do
             @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-loadurl=\"/load/data\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
           end
 
-          it "usea the display-text preferrably" do
+          it "use the display-text preferrably" do
             @result = @tester.on_the_spot_edit @dummy, :content, :type => :select, :loadurl => '/load/data', :display_text => 'ninja'
             @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-loadurl=\"/load/data\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">ninja</span>"
           end

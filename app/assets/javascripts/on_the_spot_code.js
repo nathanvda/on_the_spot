@@ -24,6 +24,7 @@ function initializeOnTheSpot(n){
         load_url      = el.attr('data-loadurl'),
         selected      = el.attr('data-selected'),
         onblur_action = el.attr('data-onblur') || 'cancel',
+        method_name   = el.attr('data-display-method') || '',
         callback      = el.attr('data-callback');
 
 
@@ -42,6 +43,7 @@ function initializeOnTheSpot(n){
         onblur: onblur_action,
         submitdata: {
           authenticity_token: auth_token,
+          display_method: method_name,
           _method: 'put'
         },
         callback: callback ? new Function("value", "settings", "return "+callback+"(this, value, settings);") : null
