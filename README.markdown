@@ -165,7 +165,7 @@ You can use these classes to style the elements.
 When using `on_the_spot` together with `cancan`, you will have to explicitly exclude the on_the_spot method,
 like so:
 
-    before_filter :load_and_authorize_resource, :except => [:update_attribute_on_the_spot]
+    load_and_authorize_resource :except => [:update_attribute_on_the_spot, :get_attribute_on_the_spot]
     
 The `load_and_authorize_resource` will try to find the object, based on the id in the parameters, but `on_the_spot` uses a different
 encoding to store the object, field and id in one attribute. So if you exclude that, there will not be a problem.
