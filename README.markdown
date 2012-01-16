@@ -37,9 +37,9 @@ Or, inside your `application.html.haml` you could still include the needed javas
 
     = javascript_include_tag :on_the_spot
 
-To use the default styling, add the following to application.css so it compiles to the asset_pipeline
+To use the default styling, add the following to `application.css` so it compiles to the asset_pipeline
 
-	//= require on_the_spot
+	*= require on_the_spot
 
 Or, inside your `application.html.haml` you could still include the needed css, using
 
