@@ -142,7 +142,18 @@ describe "OnTheSpot" do
           @result = @tester.on_the_spot_edit @dummy, :content, :url => {:action => 'update_it_otherwise' }
           @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
         end
+      end
 
+      context "with raw parameter" do
+        before(:each) do
+          @tester.should_receive(:url_for).with({:action => 'update_attribute_on_the_spot', :raw => true}).and_return('/bla?raw=true')
+        end
+
+        it "supports raw html" do
+          @dummy.stub!(:content).and_return('<b>test</b>')
+          @result = @tester.on_the_spot_edit @dummy, :content, :raw => true
+          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla?raw=true\" id=\"r_spec/mocks/mock__content__123\"><b>test</b></span>"
+        end
       end
     end
   end

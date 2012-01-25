@@ -28,9 +28,11 @@ module OnTheSpot
                              :url         => {:action => 'update_attribute_on_the_spot'}
                             )
 
+      options[:url].merge!(:raw => true) if options[:raw]
       update_url = url_for(options[:url])
 
       field_value =  object.send(field.to_sym).to_s
+      field_value = field_value.html_safe if options[:raw]
 
       html_options = { :id => "#{object.class.name.underscore}__#{field}__#{object.id}",
                        :class => 'on_the_spot_editing',

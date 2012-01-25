@@ -24,7 +24,8 @@ module OnTheSpot
                 field_or_method = if display_method.present?
                                     object.send(display_method)
                                   else
-                                    CGI::escapeHTML(object.send(field).to_s)
+                                    value = object.send(field).to_s
+                                    params[:raw] ? value : CGI::escapeHTML(value)
                                   end
                 render :text => field_or_method
               else
