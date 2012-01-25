@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{on_the_spot}
-  s.version = "0.0.18"
+  s.name = "on_the_spot"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Van der Auwera"]
-  s.date = %q{2011-12-12}
-  s.description = %q{Unobtrusive in place editing, using jEditable; only works in Rails 3}
-  s.email = %q{nathan@dixis.com}
+  s.date = "2012-01-25"
+  s.description = "Unobtrusive in place editing, using jEditable; only works in Rails 3"
+  s.email = "nathan@dixis.com"
   s.extra_rdoc_files = [
     "LICENSE",
     "README.markdown"
@@ -78,10 +78,10 @@ Gem::Specification.new do |s|
     "spec/on_the_spot_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/nathanvda/on_the_spot}
+  s.homepage = "http://github.com/nathanvda/on_the_spot"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{unobtrusive in place editing}
+  s.rubygems_version = "1.8.15"
+  s.summary = "unobtrusive in place editing"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
