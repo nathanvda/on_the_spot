@@ -12,7 +12,7 @@ On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin
 * will check your server-side validations and show the error
 * you can check the access-rights before doing any update (to check against tampering)
 * you can use custom display methods, e.g when using markdown
-* watch the demo-project [here]() ([source](https://github.com/nathanvda/on_the_spot_tester))
+* watch the demo-project [here](http://on-the-spot-demo.heroku.com/) ([source](https://github.com/nathanvda/on_the_spot_tester))
 
 
 ## Installation
