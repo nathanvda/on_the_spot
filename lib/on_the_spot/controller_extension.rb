@@ -36,7 +36,7 @@ module OnTheSpot
               render :text => object.errors.full_messages.join("\n"), :status => 422
             end
           else
-            render :text => "Acces is not allowed", :status => 422
+            render :text => t('on_the_spot.access_not_allowed'), :status => 422
           end
         end
 
@@ -50,7 +50,7 @@ module OnTheSpot
           if is_allowed
             render :text => object.send(field)
           else
-            render :text => "Acces is not allowed", :status => 422
+            render :text => t('on_the_spot.access_not_allowed'), :status => 422
           end
         end
       end

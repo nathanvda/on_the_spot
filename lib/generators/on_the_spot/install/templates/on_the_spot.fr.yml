@@ -1,0 +1,6 @@
+fr:
+  on_the_spot:
+    ok: Ok
+    cancel: Annuler
+    tooltip: Cliquer pour modifier ...
+    access_not_allowed: Il n'est pas permis de modifier cette valeur
