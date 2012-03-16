@@ -21,6 +21,7 @@ module OnTheSpot
 
       def copy_locales
         copy_file "on_the_spot.en.yml", "config/locales/on_the_spot.en.yml"
+        copy_file "on_the_spot.fr.yml", "config/locales/on_the_spot.fr.yml"
       end
 
     end
