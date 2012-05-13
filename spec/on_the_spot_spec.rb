@@ -96,7 +96,12 @@ describe "OnTheSpot" do
 
         it "makes the correct html for a select-box" do
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :select, :data => [['test', 'This a test'], ['prod', 'Pure Production'], ['QA', 'Quality Assurance']]
-          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-ok=\"ok\" data-select=\"{ 'test':'This a test', 'prod':'Pure Production', 'QA':'Quality Assurance', 'selected':'test'}\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">This a test</span>"
+          @result.should == "<span class=\"whatever on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
+        end
+
+        it "makes the correct html for a class" do
+          @result = @tester.on_the_spot_edit @dummy, :content, class: "whatever"
+          @result.should == "<span class=\"whatever on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-ok=\"ok\" data-select=\"{ 'test':'This a test', 'prod':'Pure Production', 'QA':'Quality Assurance', 'selected':'test'}\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">This a test</span>"
         end
 
         it "makes the correct html for a checkbox" do
