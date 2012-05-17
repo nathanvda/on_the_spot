@@ -29,7 +29,7 @@ module OnTheSpot
                                   end
                 render :text => field_or_method
               else
-                parsed_data = JSON.parse(select_data.gsub("'", '"'))
+                parsed_data = JSON.parse(select_data.gsub("'", '"').gsub('\"', "'"))
                 render :text => parsed_data[object.send(field).to_s]
               end
             else

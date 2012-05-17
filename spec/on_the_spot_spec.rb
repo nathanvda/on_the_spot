@@ -12,7 +12,7 @@ describe "OnTheSpot" do
       end
 
       @tester = TestClass.new
-      @test_array_nr  = [[1,"abc"], [2, "def"], [3, "ghi"]]
+      @test_array_nr  = [[1,"abc"], [2, "def"], [3, "ghi"], [4, "Freddy's Nightmare"]]
       @test_array_str = [["key", "value"], ["key2", "value2"]]
     end
 
@@ -29,11 +29,21 @@ describe "OnTheSpot" do
         @tester.lookup_display_value(@test_array_str, 'key1').should == ''
       end
 
+      it "can handle single quotes normally" do
+        @tester.lookup_display_value(@test_array_nr, 4).should == "Freddy's Nightmare"
+      end
+
     end
 
     context "convert array to json" do
       it "should convert correctly" do
-        @tester.convert_array_to_json(@test_array_nr, 1).should == "{ '1':'abc', '2':'def', '3':'ghi', 'selected':'1'}"
+        @tester.convert_array_to_json(@test_array_nr, 1).should == "{ '1':'abc', '2':'def', '3':'ghi', '4':'Freddy\\'s Nightmare', 'selected':'1'}"
+      end
+
+      it "convert an array containing an item with single quotes to valid JSON" do
+        test_array_with_single_quote = [[1, "tree"], [2, "bike"], [3, "John's hat"]]
+        json_str = @tester.convert_array_to_json(test_array_with_single_quote, 1)
+        json_str.should == "{ '1':'tree', '2':'bike', '3':'John\\'s hat', 'selected':'1'}"
       end
     end
 
