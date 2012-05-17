@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Van der Auwera"]
-  s.date = "2012-01-25"
+  s.date = "2012-05-17"
   s.description = "Unobtrusive in place editing, using jEditable; only works in Rails 3"
   s.email = "nathan@dixis.com"
   s.extra_rdoc_files = [
@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
     "lib/generators/on_the_spot/install/install_generator.rb",
     "lib/generators/on_the_spot/install/templates/jquery.jeditable.mini.js",
     "lib/generators/on_the_spot/install/templates/on_the_spot.en.yml",
+    "lib/generators/on_the_spot/install/templates/on_the_spot.fr.yml",
     "lib/on_the_spot.rb",
     "lib/on_the_spot/controller_extension.rb",
     "lib/on_the_spot/on_the_spot_helpers.rb",
