@@ -16,6 +16,7 @@ module OnTheSpot
           copy_file "../../../../../app/assets/javascripts/on_the_spot_code.js", "public/javascripts/on_the_spot.js"
           copy_file "../../../../../app/assets/javascripts/jquery.jeditable.mini.js", "public/javascripts/jquery.jeditable.mini.js"
           copy_file "../../../../../app/assets/javascripts/jquery.jeditable.checkbox.js", "public/javascripts/jquery.jeditable.checkbox.js"
+          copy_file "../../../../../app/assets/css/on_the_spot.css", "public/stylesheets/on_the_spot.css"
         end
       end
 
