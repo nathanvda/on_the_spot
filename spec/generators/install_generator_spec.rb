@@ -34,6 +34,10 @@ describe OnTheSpot::Generators::InstallGenerator do
           assert_file "public/javascripts/#{js_file}"
         end
       end
+
+      it "copies on_the_spot.css to the correct folder" do
+        assert_file "public/stylesheets/on_the_spot.css"
+      end
     end
   end
 
@@ -49,6 +53,10 @@ describe OnTheSpot::Generators::InstallGenerator do
         it "does not copy #{js_file}" do
           assert_no_file "public/javascripts/#{js_file}"
         end
+      end
+
+      it "does not copy on_the_spot.css" do
+        assert_no_file "public/stylesheets/on_the_spot.css"
       end
     end
   end
