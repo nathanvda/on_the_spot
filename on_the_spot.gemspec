@@ -81,6 +81,7 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/nathanvda/on_the_spot"
+  s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "2.1.11"
   s.summary = "unobtrusive in place editing"
@@ -89,16 +90,16 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>, [">= 2.0.0rc"])
+      s.add_development_dependency(%q<rspec>, [">= 2.6.0"])
       s.add_development_dependency(%q<actionpack>, [">= 3.0.0"])
       s.add_runtime_dependency(%q<json_pure>, [">= 1.4.6"])
     else
-      s.add_dependency(%q<rspec>, [">= 2.0.0rc"])
+      s.add_dependency(%q<rspec>, [">= 2.6.0"])
       s.add_dependency(%q<actionpack>, [">= 3.0.0"])
       s.add_dependency(%q<json_pure>, [">= 1.4.6"])
     end
   else
-    s.add_dependency(%q<rspec>, [">= 2.0.0rc"])
+    s.add_dependency(%q<rspec>, [">= 2.6.0"])
     s.add_dependency(%q<actionpack>, [">= 3.0.0"])
     s.add_dependency(%q<json_pure>, [">= 1.4.6"])
   end
