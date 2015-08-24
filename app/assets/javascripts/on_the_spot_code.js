@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on("ready page:load", function() {
 
     $(".on_the_spot_editing").mouseover(function() {
 		$(this).addClass('on_the_spot_over');
