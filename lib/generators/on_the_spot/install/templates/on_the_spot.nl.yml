@@ -1,0 +1,6 @@
+en:
+  on_the_spot:
+    ok: <button class="btn btn-primary btn-sm">Ok</button>
+    cancel: <button class="btn btn-sm">Herstellen</button>
+    tooltip: Klik om te wijzigen ...
+    access_not_allowed: Wijziging is niet toegestaan

@@ -1,6 +1,6 @@
 fr:
   on_the_spot:
-    ok: Ok
-    cancel: Annuler
+    ok: <button class="btn btn-primary btn-sm">Ok</button>
+    cancel: <button class="btn btn-sm">Annuler</button>
     tooltip: Cliquer pour modifier ...
     access_not_allowed: Il n'est pas permis de modifier cette valeur
