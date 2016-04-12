@@ -11,7 +11,7 @@ $.editable.addInputType("checkbox", {
 		$(this).append(input);
 
 		$(input).change(function() {
-			var value = $(input).attr("checked") ? 1 : 0;
+			var value = $(input).is(":checked") ? 1 : 0;
 			$(input).val(value);
 		});
 		return(input);
