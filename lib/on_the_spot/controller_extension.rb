@@ -10,16 +10,24 @@ module OnTheSpot
     module ClassMethods
       def can_edit_on_the_spot(check_acces_method=nil)
         define_method :update_attribute_on_the_spot do
-          klass, field, id = params[:id].split('__')
+          klass_name, field, id = params[:id].split('__')
           select_data = params[:select_array]
           display_method = params[:display_method]
 
-          object = klass.camelize.constantize.find(id)
+          klass = klass_name.camelize.constantize
+          object = klass.find(id)
 
           is_allowed = check_acces_method.present? ? self.send(check_acces_method, object, field) : true
 
           if is_allowed
-            if object.update_attributes(field => params[:value])
+            saved = if klass.attribute_names.include?(field)
+                      object.update_attributes(field => params[:value])
+                    else
+                      # calculated attribute?
+                      object.send("#{field}=", params[:value])
+                      object.save
+                    end
+            if saved
               if select_data.nil?
                 field_or_method = if display_method.present?
                                     object.send(display_method)
@@ -41,9 +49,9 @@ module OnTheSpot
         end
 
         define_method :get_attribute_on_the_spot do
-          klass, field, id = params[:id].split('__')
+          klass_name, field, id = params[:id].split('__')
 
-          object = klass.camelize.constantize.find(id)
+          object = klass_name.camelize.constantize.find(id)
 
           is_allowed = check_acces_method.present? ? self.send(check_acces_method, object, field) : true
 
