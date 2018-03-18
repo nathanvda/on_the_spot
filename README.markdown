@@ -2,7 +2,7 @@
 
 [![Build Status](http://travis-ci.org/nathanvda/on_the_spot.png)](http://travis-ci.org/nathanvda/on_the_spot)
 
-On-the-spot is a Rails3 compliant unobtrusive javascript in-place-editing plugin, using jEditable, and depends on jQuery.
+On-the-spot is a Rails3+ compliant unobtrusive javascript in-place-editing plugin, using jEditable, and depends on jQuery.
 
 ## Features
 
@@ -27,7 +27,7 @@ Run the installation task:
 
 This will copy the default translation files, and for rails 3.0 it will also copy the needed assets (javascript files).
 
-### Rails 3.1
+### Rails 3.1+/4/5
 
 Add the following to application.js so it compiles to the asset_pipeline
 
@@ -44,6 +44,17 @@ To use the default styling, add the following to `application.css` so it compile
 Or, inside your `application.html.haml` you could still include the needed css, using
 
 	= stylesheet_link_tag :on_the_spot
+
+
+### Rails 3.x
+
+> Breaking changes: since rails 5 render :text is deprecated and removed, this means that starting from 1.1.0
+> this gem is no longer compatible with rails 3, but is compatible with rails 4 and 5.
+> So if you are still using rails 3.x you need the fixate the version to `1.0.6`
+
+
+     gem 'on_the_spot', '1.0.6'
+
 
 
 ### Rails 3.0.x
@@ -65,7 +76,7 @@ or using erb, you write
     <%= stylesheet_link_tag :on_the_spot %>
 
 
-### Routes (for all Rails 3 versions)
+### Routes (for all Rails versions)
 
 Inside your `routes.rb` you need to provide the following route :
 
