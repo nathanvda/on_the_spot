@@ -23,3 +23,5 @@ pkg
 spec/tmp/
 spec/dummy/log/
 spec/dummy/db/*.sqlite3
+
+Gemfile.lock
