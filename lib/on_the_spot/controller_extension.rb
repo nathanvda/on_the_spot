@@ -35,16 +35,16 @@ module OnTheSpot
                                     value = object.send(field).to_s
                                     params[:raw] ? value : CGI::escapeHTML(value)
                                   end
-                render :text => field_or_method
+                render :plain => field_or_method
               else
                 parsed_data = JSON.parse(select_data.gsub("'", '"').gsub('\"', "'"))
-                render :text => parsed_data[object.send(field).to_s]
+                render :plain => parsed_data[object.send(field).to_s]
               end
             else
-              render :text => object.errors.full_messages.join("\n"), :status => 422
+              render :plain => object.errors.full_messages.join("\n"), :status => 422
             end
           else
-            render :text => t('on_the_spot.access_not_allowed'), :status => 422
+            render :plain => t('on_the_spot.access_not_allowed'), :status => 422
           end
         end
 
@@ -56,9 +56,9 @@ module OnTheSpot
           is_allowed = check_acces_method.present? ? self.send(check_acces_method, object, field) : true
 
           if is_allowed
-            render :text => object.send(field)
+            render :plain => object.send(field)
           else
-            render :text => t('on_the_spot.access_not_allowed'), :status => 422
+            render :plain => t('on_the_spot.access_not_allowed'), :status => 422
           end
         end
       end
