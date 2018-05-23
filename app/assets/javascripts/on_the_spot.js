@@ -3,6 +3,6 @@
 // now you can use just write
 //    javascript_include_tag :on_the_spot
 //
-//= require jquery.jeditable.mini.js
+//= require jquery.jeditable.js
 //= require jquery.jeditable.checkbox.js
 //= require on_the_spot_code

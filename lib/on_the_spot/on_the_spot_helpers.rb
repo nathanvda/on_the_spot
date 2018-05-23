@@ -81,11 +81,9 @@ module OnTheSpot
     end
 
     def convert_array_to_json(id_value_array, selected_id)
-      conv_arr = id_value_array.map{|idv| "'#{idv[0]}':'#{escape_javascript(idv[1])}'" }
-      result = "{ #{conv_arr.join(', ')}"
-      result += ", 'selected':'#{ selected_id.to_s}'" unless selected_id.nil?
-      result += "}"
-      result
+      result = id_value_array.to_h
+      result['selected'] = selected_id unless selected_id.nil?
+      result.to_json
     end
 
   end

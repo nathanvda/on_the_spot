@@ -37,13 +37,13 @@ describe "OnTheSpot" do
 
     context "convert array to json" do
       it "should convert correctly" do
-        @tester.convert_array_to_json(@test_array_nr, 1).should == "{ '1':'abc', '2':'def', '3':'ghi', '4':'Freddy\\'s Nightmare', 'selected':'1'}"
+        @tester.convert_array_to_json(@test_array_nr, 1).should == "{\"1\":\"abc\",\"2\":\"def\",\"3\":\"ghi\",\"4\":\"Freddy's Nightmare\",\"selected\":1}"
       end
 
       it "convert an array containing an item with single quotes to valid JSON" do
         test_array_with_single_quote = [[1, "tree"], [2, "bike"], [3, "John's hat"]]
         json_str = @tester.convert_array_to_json(test_array_with_single_quote, 1)
-        json_str.should == "{ '1':'tree', '2':'bike', '3':'John\\'s hat', 'selected':'1'}"
+        json_str.should == "{\"1\":\"tree\",\"2\":\"bike\",\"3\":\"John's hat\",\"selected\":1}"
       end
     end
 
@@ -106,7 +106,7 @@ describe "OnTheSpot" do
 
         it "makes the correct html for a select-box" do
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :select, :data => [['test', 'This a test'], ['prod', 'Pure Production'], ['QA', 'Quality Assurance']]
-          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-ok=\"ok\" data-select=\"{ 'test':'This a test', 'prod':'Pure Production', 'QA':'Quality Assurance', 'selected':'test'}\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">This a test</span>"
+          @result.should == "<span class=\"on_the_spot_editing\" data-cancel=\"cancel\" data-edittype=\"select\" data-ok=\"ok\" data-select=\"{&quot;test&quot;:&quot;This a test&quot;,&quot;prod&quot;:&quot;Pure Production&quot;,&quot;QA&quot;:&quot;Quality Assurance&quot;,&quot;selected&quot;:&quot;test&quot;}\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">This a test</span>"
         end
 
         it "makes the correct html for a checkbox" do
