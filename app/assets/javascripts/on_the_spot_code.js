@@ -1,4 +1,6 @@
-$(document).on("ready page:load turbolinks:load", function() {
+
+function generalOnTheSpotInitializer() {
+    //console.log("Init-on-the-spot ...")
 
     $(".on_the_spot_editing").mouseover(function() {
 		$(this).addClass('on_the_spot_over');
@@ -6,9 +8,19 @@ $(document).on("ready page:load turbolinks:load", function() {
     $(".on_the_spot_editing").mouseout(function() {
 		$(this).removeClass('on_the_spot_over');
     });
-    $('.on_the_spot_editing').each(initializeOnTheSpot);
 
-});
+    $('.on_the_spot_editing').each(initializeOnTheSpot);
+}
+
+if (typeof TurboLinks == "undefined") {
+    $(function() {
+        generalOnTheSpotInitializer();
+    });
+} else {
+    $(document).on("turbolinks:load", generalOnTheSpotInitializer )
+}
+
+
 
 function initializeOnTheSpot(n){
     var el            = $(this),
