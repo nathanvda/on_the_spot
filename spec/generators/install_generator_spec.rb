@@ -26,7 +26,7 @@ describe OnTheSpot::Generators::InstallGenerator do
 
       it "stubs the version correctly" do
         test_version = (Rails.version[0..2].to_f >= 3.1)
-        test_version.should be_false
+        expect(test_version).to eq(false)
       end
 
       ['on_the_spot.js', 'jquery.jeditable.mini.js', 'jquery.jeditable.checkbox.js'].each do |js_file|
