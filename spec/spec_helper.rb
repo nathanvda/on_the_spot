@@ -1,13 +1,14 @@
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
+if ENV["COVERAGE"]
+  require 'simplecov'
+  SimpleCov.start 'rails'
+end
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
 require "rspec/rails"
 require "rspec/mocks"
-require 'simplecov'
-
-SimpleCov.start 'rails'
 
 ActionMailer::Base.delivery_method = :test
 ActionMailer::Base.perform_deliveries = true
