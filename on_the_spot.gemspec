@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib".freeze]
   s.authors = ["Nathan Van der Auwera".freeze]
   s.date = "2018-05-25"
-  s.description = "Unobtrusive in place editing, using jEditable; only works in Rails 3".freeze
+  s.description = "Unobtrusive in place editing, using jEditable; for Rails 4+".freeze
   s.email = "nathan@dixis.com".freeze
   s.extra_rdoc_files = [
     "LICENSE",
