@@ -12,7 +12,7 @@ function generalOnTheSpotInitializer() {
     $('.on_the_spot_editing').each(initializeOnTheSpot);
 }
 
-if (typeof TurboLinks == "undefined") {
+if (typeof Turbolinks == "undefined") {
     $(function() {
         generalOnTheSpotInitializer();
     });
