@@ -139,6 +139,7 @@ The `on_the_spot_edit` also accepts options:
    attempt to look up the raw value of the field to edit.  This differs from the `:display_text` option, as this will also be called after update.
    This supersedes the `:display_text` option.
 * `:raw`: if set to true, evaluate the field value as raw HTML.
+* `:onblur`: accepts `cancel`, `submit` or `ignore` changes the behavior of the onblur handler accordingly
 
 
 For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
@@ -183,7 +184,7 @@ When using `on_the_spot` together with `cancan`, you will have to explicitly exc
 like so:
 
     load_and_authorize_resource :except => [:update_attribute_on_the_spot, :get_attribute_on_the_spot]
-    
+
 The `load_and_authorize_resource` will try to find the object, based on the id in the parameters, but `on_the_spot` uses a different
 encoding to store the object, field and id in one attribute. So if you exclude that, there will not be a problem.
 
