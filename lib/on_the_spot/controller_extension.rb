@@ -8,7 +8,10 @@ module OnTheSpot
     # if this method is called inside a controller, the edit-on-the-spot
     # controller action is added that will allow to edit fields in place
     module ClassMethods
-      def can_edit_on_the_spot(check_acces_method=nil)
+      def can_edit_on_the_spot(options_or_check_access_method=nil)
+        check_access_method = options_or_check_access_method.is_a?(Hash) ? options_or_check_access_method[:is_allowed] : options_or_check_access_method
+        on_success_method   = options_or_check_access_method.is_a?(Hash) ? options_or_check_access_method[:on_success] : nil
+
         define_method :update_attribute_on_the_spot do
           klass_name, field, id = params[:id].split('__')
           select_data = params[:select_array]
@@ -17,7 +20,7 @@ module OnTheSpot
           klass = klass_name.camelize.constantize
           object = klass.find(id)
 
-          is_allowed = check_acces_method.present? ? self.send(check_acces_method, object, field) : true
+          is_allowed = check_access_method.present? ? self.send(check_access_method, object, field) : true
 
           if is_allowed
             saved = if klass.attribute_names.include?(field)
@@ -28,6 +31,9 @@ module OnTheSpot
                       object.save
                     end
             if saved
+              if on_success_method.present?
+                self.send(on_success_method, object, field, params[:value])
+              end
               if select_data.nil?
                 field_or_method = if display_method.present?
                                     object.send(display_method)
@@ -53,7 +59,7 @@ module OnTheSpot
 
           object = klass_name.camelize.constantize.find(id)
 
-          is_allowed = check_acces_method.present? ? self.send(check_acces_method, object, field) : true
+          is_allowed = check_access_method.present? ? self.send(check_access_method, object, field) : true
 
           if is_allowed
             render :plain => object.send(field)

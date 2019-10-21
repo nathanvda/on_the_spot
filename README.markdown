@@ -116,6 +116,11 @@ It should be as simple as that :)
 
 ## Detailed options
 
+The `can_edit_on_the_spot` accepts options:
+
+* `:is_allowed`: method-name to call to check if the update is allowed to be performed
+* `:on_success`: method-name that is called when the update was succesfully performed, this could be used for audit-logging a.o.
+
 The `on_the_spot_edit` also accepts options:
 
 * `:type`    : `:textarea`, `:select` or `:checkbox` (none means default edit)
@@ -195,6 +200,26 @@ In your controller write:
       # verify that the current user has access to edit/see the field of given object
     end
 
+
+Note, there are two identical ways to add this: either you use the _old format_ : `can_edit_on_the_spot :method_name` or
+you could use the new format: `can_edit_on_the_spot is_allowed: :check_access`. Both are identical
+
+
+## Performing an action upon succesful update
+
+If you want to perform some action upon succesfully updating a field,
+you can specify a method to do just that.
+
+
+In your controller write:
+
+    can_edit_on_the_spot on_success: :log_changes
+
+    protected
+
+    def log_changes(updated_object, field, value)
+      Rails.logger.debug("We updated #{updated_object.name} and set #{field} to #{value}")
+    end
 
 
 ## Example project
