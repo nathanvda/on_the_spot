@@ -17,6 +17,7 @@
  * @param {Number} [options.cols] - Number of columns if using textarea
  * @param {String} [options.cssclass] - CSS class to apply to input form; use 'inherit' to copy from parent
  * @param {String} [options.inputcssclass] - CSS class to apply to input. 'inherit' to copy from parent
+ * @param {Function} [options.intercept] - Intercept the returned data so you have a chance to process it before returning it in the page
  * @param {String|Function} [options.data] - Content loaded in the form
  * @param {String} [options.event='click'] - jQuery event such as 'click' of 'dblclick'. See https://api.jquery.com/category/events/
  * @param {String} [options.formid] - Give an id to the form that is produced
@@ -46,6 +47,7 @@
  * @param {Boolean} [options.select] - When true text is selected
  * @param {Function} [options.showfn]- Function that can animate the element when switching to edit mode
  * @param {String} [options.size] - The size of the text field
+ * @param {String} [options.sortselectoptions] - Sort the options of a select form
  * @param {Number} [options.step] - Step size for number type
  * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
  * @param {String} [options.submit] - submit button value, empty means no button
@@ -88,7 +90,7 @@
         }
         if ('destroy' === target) {
             $(this)
-                .unbind($(this).data('event.editable'))
+                .off($(this).data('event.editable'))
                 .removeData('disabled.editable')
                 .removeData('event.editable');
             return;
@@ -135,7 +137,7 @@
             }
 
             // EVENT IS FIRED
-            $(this).bind(settings.event, function(e) {
+            $(this).on(settings.event, function(e) {
 
                 /* Abort if element is disabled. */
                 if (true === $(this).data('disabled.editable')) {
@@ -143,7 +145,7 @@
                 }
 
                 // do nothing if user press Tab again, just go to next element, not into edit mode
-                if (e.keyCode === 9) {
+                if (e.which === 9) {
                     return;
                 }
 
@@ -159,7 +161,7 @@
 
                 /* execute the before function if any was specified */
                 if (settings.before && jQuery.isFunction(settings.before)) {
-                    settings.before();
+                    settings.before(e);
                 } else if (settings.before && !jQuery.isFunction(settings.before)) {
                     throw "The 'before' option needs to be provided as a function!";
                 }
@@ -231,7 +233,7 @@
 
                 // timeout function
                 var t;
-                var is_submitting = false;
+                var isSubmitting = false;
 
                 if (settings.loadurl) {
                     t = self.setTimeout(function() {
@@ -298,7 +300,7 @@
                 plugin.apply(form, [settings, self]);
 
                 /* Focus to first visible form element. */
-                form.find(':input:visible:enabled:first').focus();
+                form.find(':input:visible:enabled:first').trigger('focus');
 
                 /* Highlight input contents when requested. */
                 if (settings.select) {
@@ -306,30 +308,35 @@
                 }
 
                 /* discard changes if pressing esc */
-                input.keydown(function(e) {
-                    if (e.keyCode === 27) {
+                $(this).on('keydown', function(e) {
+                    if (e.which === 27) {
                         e.preventDefault();
                         reset.apply(form, [settings, self]);
+                        /* allow shift+enter to submit form (required for textarea) */
+                    } else if (e.which == 13 && e.shiftKey){
+                        e.preventDefault();
+                        form.trigger('submit');
                     }
                 });
 
                 /* Discard, submit or nothing with changes when clicking outside. */
                 /* Do nothing is usable when navigating with tab. */
                 if ('cancel' === settings.onblur) {
-                    input.blur(function(e) {
+                    input.on('blur', function(e) {
                         /* Prevent canceling if submit was clicked. */
                         t = self.setTimeout(function() {
                             reset.apply(form, [settings, self]);
                         }, 500);
                     });
                 } else if ('submit' === settings.onblur) {
-                    input.blur(function(e) {
+                    input.on('blur', function(e) {
                         /* Prevent double submit if submit was clicked. */
-                        console.log("BLUR submitting");
-                        form.submit();
+                        t = self.setTimeout(function() {
+                            form.trigger('submit');
+                        }, 200);
                     });
                 } else if ($.isFunction(settings.onblur)) {
-                    input.blur(function(e) {
+                    input.on('blur', function(e) {
                         // reset the form if the onblur function returns false
                         if (false === settings.onblur.apply(self, [input.val(), settings, form])) {
                             reset.apply(form, [settings, self]);
@@ -337,18 +344,17 @@
                     });
                 }
 
-                form.submit(function(e) {
-                    console.log("Form.submit");
+                form.on('submit', function(e) {
 
                     /* Do no submit. */
                     e.preventDefault();
                     e.stopPropagation();
 
-                    if (is_submitting) {
-                        console.log("...we are already submitting .. stop!");
+                    if (isSubmitting) {
+                        // we are already submitting! Stop right here.
                         return false;
                     } else {
-                        is_submitting = true;
+                        isSubmitting = true;
                     }
 
                     if (t) {
@@ -357,27 +363,32 @@
 
                     /* Call before submit hook. */
                     /* If it returns false abort submitting. */
-                    if (false !== onsubmit.apply(form, [settings, self])) {
+                    isSubmitting = false !== onsubmit.apply(form, [settings, self]);
+                    if (isSubmitting) {
                         /* Custom inputs call before submit hook. */
                         /* If it returns false abort submitting. */
-                        if (false !== submit.apply(form, [settings, self])) {
+                        isSubmitting = false !== submit.apply(form, [settings, self]);
+                        if (isSubmitting) {
 
                             /* Check if given target is function */
                             if ($.isFunction(settings.target)) {
                                 /* Callback function to handle the target reponse */
-                                var responseHandler = function(value) {
-                                    $(self).html(value);
-                                    self.editing = false;
-                                    callback.apply(self, [self.innerHTML, settings]);
-                                    if (!$.trim($(self).html())) {
-                                        $(self).html(settings.placeholder);
+                                var responseHandler = function(value, complete) {
+                                    isSubmitting = false;
+                                    if (false !== complete) {
+                                        $(self).html(value);
+                                        self.editing = false;
+                                        callback.apply(self, [self.innerText, settings]);
+                                        if (!$.trim($(self).html())) {
+                                            $(self).html(settings.placeholder);
+                                        }
                                     }
                                 };
                                 /* Call the user target function */
                                 var userTarget = settings.target.apply(self, [input.val(), settings, responseHandler]);
                                 /* Handle the target function return for compatibility */
                                 if (false !== userTarget && undefined !== userTarget) {
-                                    responseHandler(userTarget);
+                                    responseHandler(userTarget, userTarget);
                                 }
 
                             } else {
@@ -403,6 +414,9 @@
                                 /* Defaults for ajaxoptions. */
                                 var ajaxoptions = {
                                     type    : 'POST',
+                                    complete: function (xhr, status) {
+                                        isSubmitting = false;
+                                    },
                                     data    : submitdata,
                                     dataType: 'html',
                                     url     : settings.target,
@@ -446,7 +460,7 @@
                 if (self.editing) {
                     /* Before reset hook, if it returns false abort reseting. */
                     if (false !== onreset.apply(form, [settings, self])) {
-                        $(self).html(self.revert);
+                        $(self).text(self.revert);
                         self.editing   = false;
                         if (!$.trim($(self).html())) {
                             $(self).html(settings.placeholder);
@@ -462,7 +476,7 @@
             // DESTROY
             self.destroy = function(form) {
                 $(self)
-                    .unbind($(self).data('event.editable'))
+                    .off($(self).data('event.editable'))
                     .removeData('disabled.editable')
                     .removeData('event.editable');
 
@@ -504,7 +518,6 @@
 
             // SETTIMEOUT
             self.setTimeout = function(callback, time) {
-                console.log("SELF :: setTimeout");
                 var timeouts = $(self).data('timeouts');
                 var t = setTimeout(function() {
                     callback();
@@ -550,12 +563,9 @@
                     if (settings.submit) {
                         /* If given html string use that. */
                         if (settings.submit.match(/>$/)) {
-                            submit = $(settings.submit).click(function(e) {
-                                e.stopPropagation();
-                                e.preventDefault();
+                            submit = $(settings.submit).on('click', function() {
                                 if (submit.attr('type') !== 'submit') {
-                                    console.log("submit button clicked ... ");
-                                    form.submit();
+                                    form.trigger('submit');
                                 }
                             });
                             /* Otherwise use button with given string as text. */
@@ -583,7 +593,7 @@
                         }
                         $(this).append(cancel);
 
-                        $(cancel).click(function(event) {
+                        $(cancel).on('click', function(event) {
                             var reset;
                             if ($.isFunction($.editable.types[settings.type].reset)) {
                                 reset = $.editable.types[settings.type].reset;
@@ -678,16 +688,29 @@
                     // Create tuples for sorting
                     var tuples = [];
                     var key;
-                    for (key in json) {
-                        tuples.push([key, json[key]]); // Store: [key, value]
-                    }
-                    // sort it
-                    //tuples.sort(function(a, b) {
-                    //    a = a[1];
-                    //    b = b[1];
-                    //    return a < b ? -1 : (a > b ? 1 : 0);
-                    //});
 
+                    if (Array.isArray(json) && json.every(Array.isArray)) {
+                        // Process list of tuples
+                        tuples = json // JSON already contains list of [key, value]
+                        json = {};
+                        tuples.forEach(function(e) {
+                            json[e[0]] = e[1]; // Recreate json object to comply with following code
+                        });
+                    } else {
+                        // Process object
+                        for (key in json) {
+                            tuples.push([key, json[key]]); // Store: [key, value]
+                        }
+                    }
+
+                    if (settings.sortselectoptions) {
+                        // sort it
+                        tuples.sort(function (a, b) {
+                            a = a[1];
+                            b = b[1];
+                            return a < b ? -1 : (a > b ? 1 : 0);
+                        });
+                    }
                     // now add the options to our select
                     var option;
                     for (var i = 0; i < tuples.length; i++) {
@@ -700,21 +723,21 @@
 
                         if (key !== 'selected') {
                             option = $('<option />').val(key).append(value);
-                        }
 
-                        // add the selected prop if it's the same as original or if the key is 'selected'
-                        if (json['selected'] === key || key === $.trim(original.revert)) {
-                            $(option).prop('selected', value);
-                        }
+                            // add the selected prop if it's the same as original or if the key is 'selected'
+                            if (json.selected === key || key === $.trim(original.revert)) {
+                                $(option).prop('selected', 'selected');
+                            }
 
-                        $(this).find('select').append(option);
+                            $(this).find('select').append(option);
+                        }
                     }
 
                     // submit on change if no submit button defined
                     if (!settings.submit) {
                         var form = this;
                         $(this).find('select').change(function() {
-                            form.submit();
+                            form.trigger('submit');
                         });
                     }
                 }
@@ -796,6 +819,7 @@
         loadtype   : 'GET',
         loadtext   : 'Loading...',
         placeholder: 'Click to edit',
+        sortselectoptions: false,
         loaddata   : {},
         submitdata : {},
         ajaxoptions: {}
