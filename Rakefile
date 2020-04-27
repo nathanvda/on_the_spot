@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake'
 require "rspec/core/rake_task"
+require 'erb'
+require 'JSON'
 
 begin
   require 'jeweler'
@@ -21,6 +23,51 @@ begin
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
+
+
+require 'bundler/gem_tasks'
+
+spec = Bundler.load_gemspec('./on_the_spot.gemspec')
+
+
+npm_src_dir = './npm'
+npm_dest_dir = './dist'
+CLOBBER.include 'dist'
+
+assets_dir = './app/assets/'
+
+npm_files = {
+    File.join(npm_dest_dir, 'on_the_spot_code.js') => File.join(assets_dir, 'javascripts', 'on_the_spot_code.js'),
+    File.join(npm_dest_dir, 'on_the_spot.css') => File.join(assets_dir, 'stylesheets', 'on_the_spot.css'),
+    File.join(npm_dest_dir, 'README.md') => File.join(npm_src_dir, 'README.md'),
+    File.join(npm_dest_dir, 'LICENSE') => './LICENSE'
+}
+
+namespace :npm do
+  npm_files.each do |dest, src|
+    file dest => src do
+      cp src, dest
+    end
+  end
+
+  task :'package-json' do
+    template = ERB.new(File.read(File.join(npm_src_dir, 'package.json.erb')))
+    content = template.result_with_hash(spec: spec)
+    File.write(File.join(npm_dest_dir, 'package.json'),
+               JSON.pretty_generate(JSON.parse(content)))
+  end
+
+  desc "Build nathanvda-on_the_spot-#{spec.version}.tgz into the pkg directory"
+  task build: (%i[package-json] + npm_files.keys) do
+    system("cd #{npm_dest_dir} && npm pack && mv ./nathanvda-on_the_spot-#{spec.version}.tgz ../pkg/")
+  end
+
+  desc "Build and push nathanvda-on_the_spot-#{spec.version}.tgz to https://npmjs.org"
+  task release: %i[build] do
+    system("npm publish ./pkg/nathanvda-on_the_spot-#{spec.version}.tgz --access public")
+  end
+end
+
 
 
 RSpec::Core::RakeTask.new(:spec)

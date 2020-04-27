@@ -19,6 +19,7 @@ tmtags
 coverage
 rdoc
 pkg
+dist
 
 spec/tmp/
 spec/dummy/log/
