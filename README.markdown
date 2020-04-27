@@ -27,6 +27,21 @@ Run the installation task:
 
 This will copy the default translation files, and for rails 3.0 it will also copy the needed assets (javascript files).
 
+### Rails 6 
+
+Add the componanion package
+
+    yarn add @nathanvda/on_the_spot 
+    
+and then in your `app/javascripts/packs/application.js` you should add
+
+    require("jquery")
+    require("jquery-jeditable")
+    require("@nathanvda/on_the_spot")
+
+ 
+    
+
 ### Rails 3.1+/4/5
 
 Add the following to application.js so it compiles to the asset_pipeline
@@ -128,6 +143,8 @@ The `on_the_spot_edit` also accepts options:
 * `:cancel_text` : the text for the cancel-button
 * `:display_text`: if you want to overrule the displayed text, especially useful when using your own `:url` or `:loadurl`
 * `:tooltip` : the tooltip-text
+* `:form_css`: the css class for the form
+* `:input_css`: the css class for the input itself
 * `:rows`: for textarea, the number of rows, defaults to 5
 * `:columns`: for textarea, the number of columns, defaults to 40
 * `:data`: for select, the lookup-data, should be in an array of id-value pairs. E.g. `[[1, 'ok'], [2, 'not ok'], [3, 'not decided']]`.
@@ -142,7 +159,21 @@ The `on_the_spot_edit` also accepts options:
 * `:onblur`: accepts `cancel`, `submit` or `ignore` changes the behavior of the onblur handler accordingly
 
 
-For the texts: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
+For the texts and css classes: if a text is not specified, the default is taken from the `on_the_spot.en.yml` (or your current language).
+
+E.g. in the translations file `on_the_spot.en.yml` you could do the following to get the inline editor look good when using bootstrap: 
+
+```
+en:
+  on_the_spot:
+    ok: <button class="btn btn-primary btn-sm">Ok</button>
+    cancel: <button class="btn btn-sm">Cancel</button>
+    tooltip: Click to edit ...
+    access_not_allowed: Access is not allowed
+    form_css: 'form form-inline'
+    input_css: 'form-control'
+```
+
 
 ## Styling
 
