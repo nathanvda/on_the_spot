@@ -23,6 +23,8 @@ module OnTheSpot
       options.reverse_merge!(:ok_text     => t('on_the_spot.ok'),
                              :cancel_text => t('on_the_spot.cancel'),
                              :tooltip     => t('on_the_spot.tooltip'),
+                             :form_css    => t('on_the_spot.form_css'),
+                             :input_css   => t('on_the_spot.input_css'),
                              :rows        => 5,
                              :columns     => 40,
                              :url         => {:action => 'update_attribute_on_the_spot'}
@@ -58,6 +60,8 @@ module OnTheSpot
       html_options[:'data-onblur']         = options[:onblur] if options[:onblur] && ['cancel','submit', 'ignore'].include?(options[:onblur])
       html_options[:'data-loadurl']        = options[:loadurl] unless options[:loadurl].nil?
       html_options[:'data-display-method'] = options[:display_method] unless options[:display_method].nil?
+      html_options[:'data-form-css']       = options[:form_css] if options[:form_css].present?
+      html_options[:'data-input-css']      = options[:input_css] if options[:input_css].present?
       if html_options[:'data-display-method'].present? && html_options[:'data-loadurl'].nil?
         html_options[:'data-loadurl'] = url_for(:action => 'get_attribute_on_the_spot')
       end

@@ -29,6 +29,8 @@ function initializeOnTheSpot(n){
         ok_text       = el.attr('data-ok') || 'OK',
         cancel_text   = el.attr('data-cancel') || 'Cancel',
         tooltip_text  = el.attr('data-tooltip') || 'Click to edit ...',
+        form_css      = el.attr('data-form-css'),
+        input_css     = el.attr('data-input-css'),
         edit_type     = el.attr('data-edittype'),
         select_data   = el.attr('data-select'),
         rows          = el.attr('data-rows'),
@@ -45,6 +47,8 @@ function initializeOnTheSpot(n){
         placeholder: tooltip_text,
         cancel: cancel_text,
         submit: ok_text,
+        cssclass: form_css,
+        inputcssclass: input_css,
         select: selected,
         onerror: function (settings, original, xhr) {
             original.reset();
