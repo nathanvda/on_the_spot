@@ -55,6 +55,8 @@ RSpec.describe "OnTheSpot" do
         expect(@tester).to receive(:t).with('on_the_spot.ok').and_return("ok")
         expect(@tester).to receive(:t).with('on_the_spot.cancel').and_return("cancel")
         expect(@tester).to receive(:t).with('on_the_spot.tooltip').and_return("tooltip")
+        expect(@tester).to receive(:t).with('on_the_spot.form_css').and_return(nil)
+        expect(@tester).to receive(:t).with('on_the_spot.input_css').and_return(nil)
       end
 
       context "with standard route" do
@@ -168,3 +170,4 @@ RSpec.describe "OnTheSpot" do
     end
   end
 end
+

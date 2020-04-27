@@ -29,7 +29,7 @@ describe OnTheSpot::Generators::InstallGenerator do
         expect(test_version).to eq(false)
       end
 
-      ['on_the_spot.js', 'jquery.jeditable.mini.js', 'jquery.jeditable.checkbox.js'].each do |js_file|
+      ['on_the_spot.js', 'jquery.jeditable.js', 'jquery.jeditable.checkbox.js'].each do |js_file|
         it "copies #{js_file} to the correct folder" do
           assert_file "public/javascripts/#{js_file}"
         end
@@ -49,7 +49,7 @@ describe OnTheSpot::Generators::InstallGenerator do
         run_generator
       end
 
-      ['on_the_spot.js', 'jquery.jeditable.mini.js', 'jquery.jeditable.checkbox.js'].each do |js_file|
+      ['on_the_spot.js', 'jquery.jeditable.js', 'jquery.jeditable.checkbox.js'].each do |js_file|
         it "does not copy #{js_file}" do
           assert_no_file "public/javascripts/#{js_file}"
         end
