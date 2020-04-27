@@ -3,7 +3,8 @@ source "http://rubygems.org"
 
 group :test do
   gem "rake"
-  gem "jeweler"
+  # gem "jeweler"
+  gem "jeweler", git: 'git@github.com:technicalpickles/jeweler'
   gem "json_pure"
   gem "rspec",   ">= 2.6.0"
   gem "rails", "~> 4.2.0"
