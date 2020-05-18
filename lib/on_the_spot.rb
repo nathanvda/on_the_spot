@@ -13,7 +13,13 @@ module OnTheSpot
     # configure our plugin on boot. other extension points such
     # as configuration, rake tasks, etc, are also available
     initializer "on_the_spot.initialize" do |app|
-      ActionController::Base.send :include, OnTheSpot::ControllerExtension
+      if Rails::VERSION::MAJOR >= 6
+        ActiveSupport.on_load(:action_controller) do
+          ActionController::Base.send :include, OnTheSpot::ControllerExtension
+        end
+      else
+        ActionController::Base.send :include, OnTheSpot::ControllerExtension
+      end
       ActionView::Base.send :include, OnTheSpot::Helpers
     end
 
