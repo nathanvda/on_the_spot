@@ -19,6 +19,7 @@ module OnTheSpot
     #   url          : (optional) URL to post to if you don't want to use the standard routes
     #   selected     : (optional) boolean, text selected on edit
     #   callback     : (optional) a javascript function that is called after form has been submitted
+    #   class        : (optional) custom html class
     def on_the_spot_edit(object, field, options={})
       options.reverse_merge!(:ok_text     => t('on_the_spot.ok'),
                              :cancel_text => t('on_the_spot.cancel'),
@@ -27,7 +28,8 @@ module OnTheSpot
                              :input_css   => t('on_the_spot.input_css'),
                              :rows        => 5,
                              :columns     => 40,
-                             :url         => {:action => 'update_attribute_on_the_spot'}
+                             :url         => {:action => 'update_attribute_on_the_spot'},
+                             :class       => 'on_the_spot_editing'
                             )
 
       options[:url].merge!(:raw => true) if options[:raw]
@@ -35,9 +37,9 @@ module OnTheSpot
 
       field_value =  object.send(field.to_sym).to_s
       field_value = field_value.html_safe if options[:raw]
-
+      options[:class] += ' on_the_spot_editing' unless options[:class].include?('on_the_spot_editing')
       html_options = { :id => "#{object.class.name.underscore}__#{field}__#{object.id}",
-                       :class => 'on_the_spot_editing',
+                       :class => options[:class],
                        :'data-url' => update_url}
 
       editable_type = options[:type].nil? ? nil : options[:type].to_sym

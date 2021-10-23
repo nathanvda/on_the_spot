@@ -111,6 +111,11 @@ RSpec.describe "OnTheSpot" do
           expect(@result).to eq("<span id=\"r_spec/mocks/double__content__123\" class=\"on_the_spot_editing\" data-url=\"/bla\" data-edittype=\"select\" data-select=\"{&quot;test&quot;:&quot;This a test&quot;,&quot;prod&quot;:&quot;Pure Production&quot;,&quot;QA&quot;:&quot;Quality Assurance&quot;,&quot;selected&quot;:&quot;test&quot;}\" data-ok=\"ok\" data-cancel=\"cancel\" data-tooltip=\"tooltip\">This a test</span>")
         end
 
+        it "makes the correct html for a class" do
+          @result = @tester.on_the_spot_edit @dummy, :content, class: "whatever"
+          @result.should == "<span class=\"whatever on_the_spot_editing\" data-cancel=\"cancel\" data-ok=\"ok\" data-tooltip=\"tooltip\" data-url=\"/bla\" id=\"r_spec/mocks/mock__content__123\">test</span>"
+        end
+
         it "makes the correct html for a checkbox" do
           expect(@dummy).to receive(:content).and_return(true)
           @result = @tester.on_the_spot_edit @dummy, :content, :type => :checkbox
